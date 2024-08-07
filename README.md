@@ -38,6 +38,8 @@ GitHub and ClickUp.
 
 ## Installation
 
+Minerva is a GitHub `repository webhook`.
+
 ## Usage
 
 ## Release History

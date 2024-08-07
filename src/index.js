@@ -8,13 +8,15 @@ const app = express()
 //
 // Once you deploy your code to a server and update your webhook URL, you should change this to match the path portion of the URL for your webhook.
 app.post('/webhook', express.json({type: 'application/json'}), (request, response) => {
+  console.log('request: ', request)
+  console.log('response: ', response)
 
   // Respond to indicate that the delivery was successfully received.
   // Your server should respond with a 2XX response within 10 seconds of receiving a webhook delivery. If your server takes longer than that to respond, then GitHub terminates the connection and considers the delivery a failure.
   response.status(202).send('Accepted')
 
   // Check the `x-github-event` header to learn what event type was sent.
-  const githubEvent = request.headers['x-github-event']
+  const githubEvent = request.headers['X-GitHub-Event']
 
   // You should add logic to handle each event type that your webhook is subscribed to.
   // For example, this code handles the `issues` and `ping` events.
