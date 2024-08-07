@@ -19,7 +19,7 @@ app.post('/webhook', (request, response) => {
   console.log(`Incoming githubEvent: ${ githubEvent }`)
 
   // You should add logic to handle each event type that your webhook is subscribed to.
-  // For example, this code handles the `issues` and `ping` events.
+  // For example, this code handles the `issues` and `ping` events
   //
   // If any events have an `action` field, you should also add logic to handle each action that you are interested in.
   // For example, this code handles the `opened` and `closed` actions for the `issue` event.
