@@ -1,17 +1,14 @@
 // You installed the `express` library earlier. For more information, see "[JavaScript example: Install dependencies](#javascript-example-install-dependencies)."
 const express = require('express')
-const bodyParser = require('body-parser')
 
 // This initializes a new Express application.
 const app = express()
-//app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json({ extended: true }))
-//app.use(bodyParser.raw())
+app.use(express.json({ extended: true }))
 
 // This defines a POST route at the `/webhook` path. This path matches the path that you specified for the smee.io forwarding. For more information, see "[Forward webhooks](#forward-webhooks)."
 //
 // Once you deploy your code to a server and update your webhook URL, you should change this to match the path portion of the URL for your webhook.
-app.post('/webhook', express.json({type: 'application/json'}), (request, response) => {
+app.post('/webhook', (request, response) => {
   // Respond to indicate that the delivery was successfully received.
   // Your server should respond with a 2XX response within 10 seconds of receiving a webhook delivery. If your server takes longer than that to respond, then GitHub terminates the connection and considers the delivery a failure.
   response.status(202).send('Accepted')
@@ -28,9 +25,9 @@ app.post('/webhook', express.json({type: 'application/json'}), (request, respons
   //
   // For more information about the data that you can expect for each event type, see "[AUTOTITLE](/webhooks/webhook-events-and-payloads)."
   if (githubEvent === 'issues') {
-    console.log(`Issues request.body: `, JSON.stringify(request.body))
+    console.log(`Issues request.body: `, request.body)
     const body = request.body
-    console.log('request.body:', request.body)
+    console.log('request.body:', body)
     const action = body.action
     console.log(`Invoked with action: ${ action } and data:`, body)
     switch (action) {
