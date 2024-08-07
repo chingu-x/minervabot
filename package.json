@@ -2,7 +2,7 @@
   "name": "minervabot",
   "version": "1.0.0",
   "description": "A GitHub Webhook to update Clickup Tasks from GitHub Issues",
-  "main": "index.js",
+  "main": "minervabot.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chingu-x/minervabot.git"
@@ -14,8 +14,8 @@
   },
   "homepage": "https://github.com/chingu-x/minervabot#readme",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "node src/index.js",
+    "dev": "nodemon --env-file=.env src/minervabot.js",
+    "start": "node src/minervabot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
