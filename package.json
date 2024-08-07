@@ -1,0 +1,29 @@
+{
+  "name": "minervabot",
+  "version": "1.0.0",
+  "description": "A GitHub Webhook to update Clickup Tasks from GitHub Issues",
+  "main": "index.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chingu-x/minervabot.git"
+  },
+  "author": "Jim D. Medlock",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chingu-x/minervabot/issues"
+  },
+  "homepage": "https://github.com/chingu-x/minervabot#readme",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
