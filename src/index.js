@@ -14,7 +14,7 @@ app.post('/webhook', express.json({type: 'application/json'}), (request, respons
   response.status(202).send('Accepted')
 
   // Check the `x-github-event` header to learn what event type was sent.
-  const githubEvent = request.headers['X-GitHub-Event']
+  const githubEvent = request.headers['x-gitHub-event']
 
   // You should add logic to handle each event type that your webhook is subscribed to.
   // For example, this code handles the `issues` and `ping` events.
@@ -30,6 +30,12 @@ app.post('/webhook', express.json({type: 'application/json'}), (request, respons
     switch (action) {
       case 'opened':
         console.log(`An issue was opened with this title: ${ data.issue.title }`)
+        break
+      case 'assigned':
+        console.log(`A user was assigned to an issue ${ data.issue.assignee.login }`)
+        break
+      case 'labeled':
+        console.log(`A label was assigned to an issue ${ data.issue.label.name }`)
         break
       case 'closed':
         console.log(`An issue was closed by ${ data.issue.user.login }`)
