@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A GitHub Webhook to update Clickup Tasks from GitHub Issues",
   "main": "index.js",
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chingu-x/minervabot.git"
@@ -20,6 +19,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "body-parser": "^1.20.2",
     "express": "^4.19.2"
   },
   "devDependencies": {
