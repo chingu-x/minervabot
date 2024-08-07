@@ -4,12 +4,12 @@ import bodyParser from 'body-parser'
 
 // This initializes a new Express application.
 const app = express()
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // This defines a POST route at the `/webhook` path. This path matches the path that you specified for the smee.io forwarding. For more information, see "[Forward webhooks](#forward-webhooks)."
 //
 // Once you deploy your code to a server and update your webhook URL, you should change this to match the path portion of the URL for your webhook.
-app.post('/webhook', express.json({type: 'application/json'}), (request, response) => {
+app.post('/webhook', (request, response) => {
 
   // Respond to indicate that the delivery was successfully received.
   // Your server should respond with a 2XX response within 10 seconds of receiving a webhook delivery. If your server takes longer than that to respond, then GitHub terminates the connection and considers the delivery a failure.
