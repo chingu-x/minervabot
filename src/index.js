@@ -27,26 +27,26 @@ app.post('/webhook', express.json({type: 'application/json'}), (request, respons
     console.log(`Issues request.body: `, request.body)
     let body = ""
     request.on("readable", () => {
-        body += request.read()
+      body += request.read()
     });
     request.on("end", () => {
-        console.log(body)
+      console.log(body)
     })
-    //const data = request.body
-    const action = data.action
-    console.log(`Invoked with action: ${ action } and data:`, data)
+    //const body = request.body
+    const action = body.action
+    console.log(`Invoked with action: ${ action } and data:`, body)
     switch (action) {
       case 'opened':
-        console.log(`An issue was opened with this title: ${ data.issue.title }`)
+        console.log(`An issue was opened with this title: ${ body.issue.title }`)
         break
       case 'assigned':
-        console.log(`A user was assigned to an issue ${ data.issue.assignee.login }`)
+        console.log(`A user was assigned to an issue ${ body.issue.assignee.login }`)
         break
       case 'labeled':
-        console.log(`A label was assigned to an issue ${ data.issue.label.name }`)
+        console.log(`A label was assigned to an issue ${ body.issue.label.name }`)
         break
       case 'closed':
-        console.log(`An issue was closed by ${ data.issue.user.login }`)
+        console.log(`An issue was closed by ${ body.issue.user.login }`)
         break
       default:
         console.log(`Unhandled action for the issue event: ${ action }`)
