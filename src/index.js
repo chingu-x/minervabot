@@ -4,7 +4,6 @@ const bodyParser = require('body-parser')
 
 // This initializes a new Express application.
 const app = express()
-app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // This defines a POST route at the `/webhook` path. This path matches the path that you specified for the smee.io forwarding. For more information, see "[Forward webhooks](#forward-webhooks)."
