@@ -24,6 +24,7 @@ app.post('/webhook', express.json({type: 'application/json'}), (request, respons
   //
   // For more information about the data that you can expect for each event type, see "[AUTOTITLE](/webhooks/webhook-events-and-payloads)."
   if (githubEvent === 'issues') {
+    console.log(`Issues request.payload: `, request.body.payload)
     console.log(`Issues request.body: `, request.body)
     const body = request.body
     console.log('request.body:', body)
