@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 
 // This initializes a new Express application.
 const app = express()
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // This defines a POST route at the `/webhook` path. This path matches the path that you specified for the smee.io forwarding. For more information, see "[Forward webhooks](#forward-webhooks)."
@@ -26,8 +27,8 @@ app.post('/webhook', (request, response) => {
   //
   // For more information about the data that you can expect for each event type, see "[AUTOTITLE](/webhooks/webhook-events-and-payloads)."
   if (githubEvent === 'issues') {
-    console.log(`Issues request.body: `, request.body)
-    const body = JSON.parse(request.body)
+    console.log(`Issues request.body: `, request.body.payload)
+    const body = request.body.payload
     console.log('request.body:', body)
     const action = body.action
     console.log(`Invoked with action: ${ action } and data:`, body)
