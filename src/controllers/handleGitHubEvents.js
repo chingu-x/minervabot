@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler')
 
-const handleGitHubEvents = asyncHandler(async (request, ressponse) => {
+const handleGitHubEvents = asyncHandler(async (request, response) => {
   // Respond to indicate that the delivery was successfully received.
   // Your server should respond with a 2XX response within 10 seconds of 
   // receiving a webhook delivery. If your server takes longer than that to 
