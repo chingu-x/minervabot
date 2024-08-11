@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler')
-const handleNewIssue = require('./handleNewIssue.js')
+const handleNewIssue = require('./handleNewIssue')
 
 const handleGitHubEvents = asyncHandler(async (request, response) => {
   // Respond to indicate that the delivery was successfully received.
