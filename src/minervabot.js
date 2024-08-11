@@ -1,6 +1,6 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const restRoutes = require('./routes/routes.js')
+import express from 'express'
+import bodyParser from 'body-parser'
+import restRoutes from './routes/routes.js'
 
 // Initialize a new Express application.
 const app = express()
