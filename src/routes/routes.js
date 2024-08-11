@@ -1,9 +1,9 @@
-const express = require('express')
-const { handleGitHubEvents } = require('../controllers/handleGitHubEvents')
+import express from 'express'
+import { handleGitHubEvents } from '../controllers/handleGitHubEvents.js'
 
 const router = express.Router()
 
 router.route('/webhook')
     .post(handleGitHubEvents)
 
-module.exports = router
+export default router

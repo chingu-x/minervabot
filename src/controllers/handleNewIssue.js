@@ -2,6 +2,7 @@
 const handleNewIssue = (action, body) => {
   console.log(`An issue was opened with this title: ${ body.issue.title }`)
   console.log(`action: ${ action } body:`, body) 
+  return true
 }
 
-exports.handleNewIssue = handleNewIssue
+export { handleNewIssue }

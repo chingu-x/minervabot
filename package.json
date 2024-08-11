@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A GitHub Webhook to update Clickup Tasks from GitHub Issues",
   "main": "minervabot.js",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chingu-x/minervabot.git"
