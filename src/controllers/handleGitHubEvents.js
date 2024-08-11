@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler')
+const handleNewIssue = require('./handleNewIssue.js')
 
 const handleGitHubEvents = asyncHandler(async (request, response) => {
   // Respond to indicate that the delivery was successfully received.
@@ -19,7 +20,7 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
     console.log(`Invoked with action: ${ action } and data:`, body)
     switch (action) {
       case 'opened':
-        console.log(`An issue was opened with this title: ${ body.issue.title }`)
+        const newIssueResult = handleNewIssue(action, body)
         break
       case 'assigned':
         console.log(`A user was assigned to an issue ${ body.issue.assignee.login }`)
