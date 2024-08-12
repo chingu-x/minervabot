@@ -5,7 +5,8 @@ const handleNewIssue = async (action, body) => {
   console.log(`An issue was opened with this title: ${ body.issue.title }`)
   console.log(`action: ${ action } body:`, body) 
 
-  const query = new URLSearchParams({
+  const query = new URLSearchParams({})
+  /*
     archived: 'false',
     include_markdown_description: 'true',
     page: '0',
@@ -29,6 +30,7 @@ const handleNewIssue = async (action, body) => {
     custom_field: 'string',
     custom_items: '0'
   }).toString()
+  */
 
   const listId = '901203120708'
   const response = await fetch(
