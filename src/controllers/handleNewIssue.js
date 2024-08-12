@@ -37,7 +37,6 @@ const handleNewIssue = async (action, body) => {
         check_required_custom_fields: true,
         custom_fields: [
           { id: "f8e92314-d682-492b-b481-cf29457b03f9", value: body.issue.url},
-          { id: "9ef1f7c8-b8e4-4231-93b7-8054993faa46", value: ""}
         ]
       })
     }
