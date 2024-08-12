@@ -2,44 +2,44 @@ import fetch from 'node-fetch'
 
 // When a new GitHub Issue is created generate a cooresponding ClickUp Task.
 const handleNewIssue = async (action, body) => {
-  console.log(`An issue was opened with this title: ${ body.issue.title }`)
   console.log(`action: ${ action } body:`, body) 
 
-  const query = new URLSearchParams({})
-  /*
-    archived: 'false',
-    include_markdown_description: 'true',
-    page: '0',
-    order_by: 'string',
-    reverse: 'true',
-    subtasks: 'true',
-    statuses: 'string',
-    include_closed: 'true',
-    assignees: 'string',
-    watchers: 'string',
-    tags: 'string',
-    due_date_gt: '0',
-    due_date_lt: '0',
-    date_created_gt: '0',
-    date_created_lt: '0',
-    date_updated_gt: '0',
-    date_updated_lt: '0',
-    date_done_gt: '0',
-    date_done_lt: '0',
-    custom_fields: 'string',
-    custom_field: 'string',
-    custom_items: '0'
+  const query = new URLSearchParams({
+    custom_task_ids: 'false',
+    team_id: process.env.CLICKUP_TEAM_ID
   }).toString()
-  */
 
-  const listId = '901203120708'
+  const listId = process.env.CLICKUP_LIST_ID
   const response = await fetch(
     `https://api.clickup.com/api/v2/list/${listId}/task?${query}`,
     {
-      method: 'GET',
+      method: 'POST',
       headers: {
-        Authorization: 'pk_90147991_A40W5F0M3QZCH9H6PVZHF50XZ0W8GH9A'
-      }
+        'Content-Type': 'application/json',
+        Authorization: process.env.CLICKUP_API_KEY
+      },
+      body: JSON.stringify({
+        name: body.issue.title,
+        description: body.issue.body,
+        markdown_description: 'New Task Description',
+        assignees: [],
+        archived: false,
+        group_assignees: [],
+        tags: ['bug'],
+        status: 'Open',
+        priority: 3,
+        due_date_time: false,
+        start_date_time: false,
+        points: 3,
+        notify_all: true,
+        parent: null,
+        links_to: null,
+        check_required_custom_fields: true,
+        custom_fields: [
+          { id: "f8e92314-d682-492b-b481-cf29457b03f9", value: body.issue.url},
+          { id: "9ef1f7c8-b8e4-4231-93b7-8054993faa46", value: ""}
+        ]
+      })
     }
   )
 
