@@ -20,7 +20,7 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
     console.log(`Invoked with action: ${ action } and data:`, body)
     switch (action) {
       case 'opened':
-        const newIssueResult = handleNewIssue(action, body)
+        const newIssueResult = await handleNewIssue(action, body)
         console.log(`newIssueResult: ${ newIssueResult }`)
         break
       case 'assigned':
