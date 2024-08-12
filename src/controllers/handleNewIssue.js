@@ -43,8 +43,11 @@ const handleNewIssue = async (action, body) => {
     }
   )
 
-  const data = await response.text()
-  console.log(`data:`, data)
+  const tasks = await response.text()
+  for (let task of tasks.tasks) {
+    console.log(`Task id:${task.id} name:${task.name} status:${task.status}`)
+  }
+
   return response
 }
 
