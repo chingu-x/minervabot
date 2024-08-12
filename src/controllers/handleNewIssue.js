@@ -1,7 +1,5 @@
 import fetch from 'node-fetch'
 
-// Get the 
-
 // When a new GitHub Issue is created generate a cooresponding ClickUp Task.
 const handleNewIssue = async (action, body) => {
   console.log(`An issue was opened with this title: ${ body.issue.title }`)
@@ -44,8 +42,8 @@ const handleNewIssue = async (action, body) => {
   )
 
   const data = await response.text()
-  console.log(data)
-  return true
+  console.log(`data:`, data)
+  return response
 }
 
 export { handleNewIssue }
