@@ -4,6 +4,8 @@ import fetch from 'node-fetch'
 const handleNewIssue = async (action, body) => {
   console.log(`action: ${ action } body:`, body) 
 
+  const issueBody = body.issue.bodyconcat(`<br>GitHub Issue: ${ body.issue.url }`)
+
   const query = new URLSearchParams({
     custom_task_ids: 'false',
     team_id: process.env.CLICKUP_TEAM_ID
@@ -20,8 +22,8 @@ const handleNewIssue = async (action, body) => {
       },
       body: JSON.stringify({
         name: body.issue.title,
-        description: body.issue.body,
-        markdown_description: body.issue.body,
+        description: issueBody,
+        markdown_description: issueBody,
         assignees: [],
         archived: false,
         group_assignees: [],
