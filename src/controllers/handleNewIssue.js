@@ -5,7 +5,7 @@ const handleNewIssue = async (action, body) => {
   console.log(`action: ${ action } body:`, body) 
 
   let issueBody = body.issue.body.concat(`\n\nGitHub Issue: ${ body.issue.url }`)
-  issueBody = body.issue.body.concat(`\n\nReported by: ${ body.user.login }`)
+  issueBody = body.issue.body.concat(`\n\nReported by: ${ body.issue.user.login }`)
 
   const query = new URLSearchParams({
     custom_task_ids: 'false',
