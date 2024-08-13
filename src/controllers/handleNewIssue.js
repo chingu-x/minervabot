@@ -4,7 +4,7 @@ import fetch from 'node-fetch'
 const handleNewIssue = async (action, body) => {
   console.log(`action: ${ action } body:`, body) 
 
-  const issueBody = body.issue.bodyconcat(`<br>GitHub Issue: ${ body.issue.url }`)
+  const issueBody = body.issue.body.concat(`<br>GitHub Issue: ${ body.issue.url }`)
 
   const query = new URLSearchParams({
     custom_task_ids: 'false',
