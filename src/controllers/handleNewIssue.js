@@ -21,7 +21,7 @@ const handleNewIssue = async (action, body) => {
       body: JSON.stringify({
         name: body.issue.title,
         description: body.issue.body,
-        markdown_description: 'New Task Description',
+        markdown_description: body.issue.body,
         assignees: [],
         archived: false,
         group_assignees: [],
