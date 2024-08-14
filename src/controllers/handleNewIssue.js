@@ -9,12 +9,12 @@ const handleNewIssue = async (action, body) => {
   const screenshotsIndex = body.issue.body.indexOf(SCREENSHOTS_HEADING)+SCREENSHOTS_HEADING.length
   let issueBody = body.issue.body.slice(0,screenshotsIndex)
   issueBody = issueBody.concat('\nSee GitHub issue for screenshots')
-  issueBody = issueBody.concat(`\nGitHub Issue: ${ body.issue.url }`)
-  issueBody = issueBody.concat(`\nReported by: ${ body.issue.user.login }`)
+  issueBody = issueBody.concat(`\nGitHub Issue:\n${ body.issue.url }`)
+  issueBody = issueBody.concat(`\nReported by:\n${ body.issue.user.login }`)
 
   const ADDL_CONTEXT_HEADING = 'Additional context'
   const addlContextIndex = body.issue.body.indexOf(ADDL_CONTEXT_HEADING)
-  issueBody = issueBody.concat('\n',body.issue.body.slice(addlContextIndex))
+  issueBody = issueBody.concat('\n\n',body.issue.body.slice(addlContextIndex))
 
   const query = new URLSearchParams({
     custom_task_ids: 'false',
