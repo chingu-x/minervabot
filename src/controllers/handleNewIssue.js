@@ -10,7 +10,7 @@ const handleNewIssue = async (action, body) => {
   let issueBody = body.issue.body.concat(`\nReported by:\n${ body.issue.user.login }`)
   issueBody = issueBody.slice(0,screenshotsIndex)
   issueBody = issueBody.concat('\nSee GitHub issue for screenshots')
-  issueBody = issueBody.concat(`\nGitHub Issue:\n${ body.html.url }#screenshots`)
+  issueBody = issueBody.concat(`\nGitHub Issue:\n${ body.issue.html_url }#screenshots`)
 
   const ADDL_CONTEXT_HEADING = '**Additional context**'
   const addlContextIndex = body.issue.body.indexOf(ADDL_CONTEXT_HEADING)
