@@ -7,38 +7,38 @@ assignees: ''
 
 ---
 
-**Describe the bug**
+## Describe the bug
 A clear and concise description of what the bug is.
 
-**To Reproduce Bug**
+## To Reproduce Bug
 Steps to reproduce the bug:
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
 4. See error
 
-**Expected behavior**
+## Expected behavior
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
+## Screenshots
 If applicable, add screenshots to help explain your problem.
 
-**Additional context**
+## Additional context
 Add any other context about the problem here.
 
-***----------------------- End of Tester Report -------------------------***
+***--------------- End of Tester Report: DO NOT MODIFY BELOW THIS LINE ---------------***
 
-**Team Task**
+## Team Task
 Here will be added Team declaration by Team Leads.
 
-**Development start date**
+## Development start date
 Date when dev team start fixing a bug
 
-**Development end date**
+## Development end date
 Date when dev team complete fixing a bug
 
-**BugFix Deploy Date**
+## BugFix Deploy Date
 Date when BugFix is deployed, and Bug Issue is closed
 
-**PO Comment**
+## PO Comment
 Here will be PO team add a comment.
