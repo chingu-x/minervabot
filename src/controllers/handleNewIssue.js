@@ -14,7 +14,7 @@ const handleNewIssue = async (action, body) => {
 
   const ADDL_CONTEXT_HEADING = 'Additional context'
   const addlContextIndex = body.issue.body.indexOf(ADDL_CONTEXT_HEADING)
-  issueBody = issueBody.concat(body.issue.body.slice(addlContextIndex))
+  issueBody = issueBody.concat('\n',body.issue.body.slice(addlContextIndex))
 
   const query = new URLSearchParams({
     custom_task_ids: 'false',
