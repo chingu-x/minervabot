@@ -7,7 +7,7 @@ const handleNewIssue = async (action, body) => {
   // Remove any screenshots from the issue description
   const SCREENSHOTS_HEADING = '**Screenshots**'
   const screenshotsIndex = body.issue.body.indexOf(SCREENSHOTS_HEADING)+SCREENSHOTS_HEADING.length
-  let issueBody = `\n#Reported by:\n${ body.issue.user.login }`.concat(body.issue.body,'\n')
+  let issueBody = `\n## Reported by:\n${ body.issue.user.login }`.concat('\n\n',body.issue.body)
   issueBody = issueBody.slice(0,screenshotsIndex)
   issueBody = issueBody.concat('\nSee GitHub issue for screenshots')
   issueBody = issueBody.concat(`\nGitHub Issue:\n${ body.issue.html_url }#screenshots`)
