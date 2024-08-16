@@ -12,7 +12,8 @@ const createClickupWebhook = async () => {
         'Content-Type': 'application/json'
       }
     })
-    console.log('Webhook created:', response.data)
+    console.log('Webhook created:', response.data.id)
+    return response.data.id
   } catch (error) {
     console.error('Error creating webhook:', error)
   }
