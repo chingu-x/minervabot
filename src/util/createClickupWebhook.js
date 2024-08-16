@@ -4,7 +4,19 @@ const createClickupWebhook = async () => {
   try {
     const response = await axios.post(`https://api.clickup.com/api/v2/team/${process.env.CLICKUP_TEAM_ID}/webhook`, {
       endpoint: process.env.CLICKUP_WEBHOOK_URL,
-      events: ['taskUpdated'],
+      events: ['taskUpdated',
+          'taskDeleted',
+          'taskPriorityUpdated',
+          'taskStatusUpdated',
+          'taskAssigneeUpdated',
+          'taskDueDateUpdated',
+          'taskTagUpdated',
+          'taskMoved',
+          'taskCommentPosted',
+          'taskCommentUpdated',
+          'taskTimeEstimateUpdated',
+          'taskTimeTrackedUpdated'
+      ],
       space_id: process.env.CLICKUP_SPACE_ID
     }, {
       headers: {
