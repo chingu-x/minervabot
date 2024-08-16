@@ -15,7 +15,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-clickUpWebhookID = createClickupWebhook()
+clickUpWebhookID = await createClickupWebhook()
 app.use('/', restRoutes)
 
 // Start the server and listen at the specified port.

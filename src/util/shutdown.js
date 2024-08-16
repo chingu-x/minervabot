@@ -4,7 +4,6 @@ import deleteClickupWebhook from './deleteClickupWebhook.js'
 const shutdown = (server, connections, clickUpWebhookID) => {
   console.log('Received kill signal, shutting down gracefully')
 
-  // Delete the Clickup Webhook if it's active
   if (clickUpWebhookID) {
     console.log(`Terminating Clickup Webhook: ${ clickUpWebhookID }`)
     deleteClickupWebhook(clickUpWebhookID)
