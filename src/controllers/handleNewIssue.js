@@ -18,10 +18,10 @@ const handleNewIssue = async (action, body) => {
 
   const GH_ISSUE_HEADING = '***GitHub Issue No. / ID***'
   const githubIssueIndex = issueBody.indexOf(GH_ISSUE_HEADING) + GH_ISSUE_HEADING.length
-  issueBody = issueBody.slice(githubIssueIndex).concat(`\n${body.issue.number} / ${body.issue.id}`)
-
   const TEAM_TASK_HEADING = '***Team Task***'
   const teamTaskIndex = body.issue.body.indexOf(TEAM_TASK_HEADING)
+  issueBody = issueBody.slice(githubIssueIndex, teamTaskIndex).concat(`\n${body.issue.number} / ${body.issue.id}`)
+
   issueBody = issueBody.concat(body.issue.body.slice(teamTaskIndex))
 
   const query = new URLSearchParams({
