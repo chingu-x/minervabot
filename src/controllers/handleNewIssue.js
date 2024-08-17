@@ -18,7 +18,7 @@ const handleNewIssue = async (action, body) => {
 
   const GH_ISSUE_HEADING = '***GitHub Issue No. / ID***'
   const githubIssueIndex = issueBody.indexOf(GH_ISSUE_HEADING) + GH_ISSUE_HEADING.length
-  issueBody = issueBody.slice(0, githubIssueIndex).concat(`\n\n${body.issue.number} / ${body.issue.id}\n\n`)
+  issueBody = issueBody.slice(0, githubIssueIndex).concat(`\n${body.issue.number} / ${body.issue.id}\n\n`)
 
   const TEAM_TASK_HEADING = '***Team Task***'
   let teamTaskIndex = body.issue.body.indexOf(TEAM_TASK_HEADING)
