@@ -1,13 +1,7 @@
-import deleteClickupWebhook from './deleteClickupWebhook.js'
 
 // Gracefully terminate when the server is shutdown or terminated
-const shutdown = (server, connections, clickUpWebhookID) => {
+const shutdown = (server, connections) => {
   console.log('Received kill signal, shutting down gracefully')
-
-  if (clickUpWebhookID) {
-    console.log(`Terminating Clickup Webhook: ${ clickUpWebhookID }`)
-    deleteClickupWebhook(clickUpWebhookID)
-  }
 
   server.close(() => {
       console.log('Closed out remaining connections')
