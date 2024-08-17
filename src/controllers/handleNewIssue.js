@@ -16,6 +16,16 @@ const handleNewIssue = async (action, body) => {
   const addlContextIndex = body.issue.body.indexOf(ADDL_CONTEXT_HEADING)
   issueBody = issueBody.concat('\n\n',body.issue.body.slice(addlContextIndex))
 
+  const GH_ISSUE_HEADING = '***GitHub Issue No. / ID***'
+  const githubIssueIndex = issueBody.indexOf(GH_ISSUE_HEADING) + GH_ISSUE_HEADING.length
+  issueBody
+  issueBody = issueBody.concat(body.issue.body.slice(githubIssueIndex))
+  issueBody = issueBody.concat(`\n${body.issue.number} / ${body.issue.id}`)
+
+  const TEAM_TASK_HEADING = '***Team Task***'
+  const teamTaskIndex = body.issue.body.indexOf(TEAM_TASK_HEADING)
+  issueBody = issueBody.concat(body.issue.body.slice(teamTaskIndex))
+
   const query = new URLSearchParams({
     custom_task_ids: 'false',
     team_id: process.env.CLICKUP_TEAM_ID
