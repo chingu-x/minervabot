@@ -39,7 +39,7 @@ const handleNewIssue = async (action, body) => {
         Authorization: process.env.CLICKUP_API_KEY
       },
       body: JSON.stringify({
-        name: body.issue.title.concat(`[GH#${body.issue.number}]`),
+        name: body.issue.title.concat(`[GH#:${body.issue.number}/ID:${body.issue.node_id}]`),
         description: issueBody,
         markdown_description: issueBody,
         assignees: [],
