@@ -17,11 +17,11 @@ const handleNewIssue = async (action, body) => {
   issueBody = issueBody.concat('\n\n',body.issue.body.slice(addlContextIndex))
 
   const GH_ISSUE_HEADING = '***GitHub Issue No. / ID***'
-  const githubIssueIndex = issueBody.indexOf(GH_ISSUE_HEADING)
+  const githubIssueIndex = issueBody.indexOf(GH_ISSUE_HEADING) + GH_ISSUE_HEADING.length
+  issueBody = issueBody.slice(0, githubIssueIndex).concat(`\n\n${body.issue.number} / ${body.issue.id}\n\n`)
+
   const TEAM_TASK_HEADING = '***Team Task***'
-  let teamTaskIndex = issueBody.indexOf(TEAM_TASK_HEADING)
-  issueBody = issueBody.slice(githubIssueIndex, teamTaskIndex).concat(`\n${body.issue.number} / ${body.issue.id}\n\n`)
-  teamTaskIndex = issueBody.indexOf(TEAM_TASK_HEADING)
+  let teamTaskIndex = body.issue.body.indexOf(TEAM_TASK_HEADING)
   issueBody = issueBody.concat(body.issue.body.slice(teamTaskIndex))
 
   const query = new URLSearchParams({
