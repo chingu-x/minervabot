@@ -21,6 +21,9 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
       case 'opened':
         const newIssueResult = await handleNewIssue(action, body)
         break
+      case 'edited':
+        console.log(`A issue was edited ${ body }`)
+        break
       case 'assigned':
         console.log(`A user was assigned to an issue ${ body.issue.assignee.login }`)
         break
