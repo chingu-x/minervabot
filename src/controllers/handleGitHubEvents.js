@@ -14,7 +14,7 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
   console.log(`Incoming githubEvent: ${ githubEvent }`)
 
   // Look for specific GitHub events to process.
-  if (githubEvent === 'issues') {
+  if (githubEvent === 'issues' || githubEvent === 'issue_comment') {
     const body = JSON.parse(request.body.payload)
     const action = body.action
     console.log(`handleGitHubEvents - action: ${ action }`)
