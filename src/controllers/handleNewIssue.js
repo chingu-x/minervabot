@@ -59,7 +59,7 @@ const handleNewIssue = async (action, body) => {
   )
 
   const tasks = await response.text()
-  console.log(`handleNewIssue - tasks:`, tasks)
+  //console.log(`handleNewIssue - tasks:`, tasks)
 
   return response
 }
