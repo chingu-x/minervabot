@@ -17,6 +17,7 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
   if (githubEvent === 'issues') {
     const body = JSON.parse(request.body.payload)
     const action = body.action
+    console.log(`handleGitHubEvents - action: ${ action }`)
     switch (action) {
       case 'opened':
         const newIssueResult = await handleNewIssue(action, body)
