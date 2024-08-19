@@ -23,11 +23,11 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
         break
       case 'edited':
         console.log(`Issue (${ body.issue.title } / ${ body.issue.number }) has been edited. body.issue.labels: `, body.issue.labels)
-        /*
-        if () {
+        
+        if (body.issue.labels.find(label => label.name === 'Add to Clickup')) {
           const newIssueResult = await handleNewIssue(action, body)
         }
-        */
+        
         break
       case 'assigned':
         console.log(`A user was assigned to an issue ${ body.issue.assignee.login }`)
