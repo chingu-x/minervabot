@@ -21,7 +21,7 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
       case 'opened':
         const newIssueResult = await handleNewIssue(action, body)
         break
-      case 'edited':
+      case 'issue_comment':
         console.log(`Issue (${ body.issue.title } / ${ body.issue.number }) has been edited. body.issue.labels: `, body.issue.labels)
         
         if (body.issue.labels.find(label => label.name === 'Add to Clickup')) {
