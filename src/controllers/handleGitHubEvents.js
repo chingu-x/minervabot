@@ -14,7 +14,7 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
   console.log(`Incoming githubEvent: ${ githubEvent }`)
 
   // Look for specific GitHub events to process.
-  if (githubEvent === 'issues' || githubEvent === 'issue_comment') {
+  if (githubEvent === 'issues') {
     const body = JSON.parse(request.body.payload)
     const action = body.action
     console.log(`handleGitHubEvents - action: ${ action }`)
@@ -22,7 +22,8 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
       case 'opened':
         const newIssueResult = await handleNewIssue(action, body)
         break
-      case 'issue_comment':
+      /*
+      case 'created':
         console.log(`Issue (${ body.issue.title } / ${ body.issue.number }) has been edited. body.issue.labels: `, body.issue.labels)
         
         if (body.issue.labels.find(label => label.name === 'Add to Clickup')) {
@@ -30,11 +31,16 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
         }
         
         break
+      */
       case 'assigned':
         console.log(`A user was assigned to an issue ${ body.issue.assignee.login }`)
         break
       case 'labeled':
-        console.log(`A label was assigned to an issue`, body.issue.labels)
+        console.log(`Issue (${ body.issue.title } / ${ body.issue.number }) A label was assigned to an issue: `, body.issue.labels)
+        
+        if (body.issue.labels.find(label => label.name === 'Add to Clickup')) {
+          const newIssueResult = await handleNewIssue(action, body)
+        }
         break
       case 'closed':
         console.log(`An issue was closed by ${ body.issue.user.login }`)
