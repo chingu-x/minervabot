@@ -33,7 +33,7 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
         console.log(`A user was assigned to an issue ${ body.issue.assignee.login }`)
         break
       case 'labeled':
-        console.log(`A label was assigned to an issue ${ body.issue.label.name }`)
+        console.log(`A label was assigned to an issue`, body.issue.labels)
         break
       case 'closed':
         console.log(`An issue was closed by ${ body.issue.user.login }`)
