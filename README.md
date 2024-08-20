@@ -38,6 +38,16 @@ updated in the cooresponding GitHub issue at this time. Similarly, this is a
 one way operation. Issue data is only pushed one-way to Clickup and **not** from
 Clickup to Github to eliminate the chance of lost data.
 
+```mermaid
+graph LR
+    A[("User adds Issue in GitHub")] --> B["New Task added to Clickup"]
+```
+
+```mermaid
+graph LR
+    A[("User updates status, priority, or team label in GitHub")] --> B["Clickup Task updated"]
+```
+
 [Minerva](https://en.wikipedia.org/wiki/Minerva) is the Roman goddess of wisdom,
 justice, law, victory, and the sponsor of arts, trade, and strategy. Her domain
 includes music, poetry, medicine, wisdom, commerce, weaving, and the crafts. As
