@@ -40,12 +40,12 @@ Clickup to Github to eliminate the chance of lost data.
 
 ```mermaid
 graph LR
-    A(("User adds Issue in GitHub")) --> B["New Task added to Clickup"]
+    A(("User adds Issue\nin GitHub")) --> B["New Task added to Clickup"]
 ```
 
 ```mermaid
 graph LR
-    A(("User updates status, priority, or team label in GitHub")) --> B["Clickup Task updated"]
+    A(("User updates\nstatus, priority,\nor team label\nin GitHub")) --> B["Clickup Task updated"]
 ```
 
 [Minerva](https://en.wikipedia.org/wiki/Minerva) is the Roman goddess of wisdom,
