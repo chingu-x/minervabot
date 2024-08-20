@@ -45,7 +45,7 @@ graph LR
 
 ```mermaid
 graph LR
-    A(("User updates\nstatus, priority,\nor team label\nin GitHub")) --> B["Clickup Task updated"]
+    A(("User updates\nstatus, priority,\nor team label\in Issue")) --> B["Clickup Task updated"]
 ```
 
 [Minerva](https://en.wikipedia.org/wiki/Minerva) is the Roman goddess of wisdom,
