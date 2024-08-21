@@ -6,11 +6,13 @@ import { Octokit } from 'octokit'
 let response
 
 const connectIssueToClickup = async (clickupTaskID, githubIssueNo) => {
+  console.log(`connectIssueToClickup - task ID:${ clickupTaskID } issue no: ${ githubIssueNo }`)
   try {
     const octokit = new Octokit({
       auth: process.env.GITHUB_TOKEN
     })
     
+    /*
     // Retrieve the GitHub Issue
     getIssueResponse = await octokit.request(`GET /repos/{owner}/{repo}/issues/${githubIssueNo}`, {
       owner: process.env.GITHUB_ORG,
@@ -20,6 +22,7 @@ const connectIssueToClickup = async (clickupTaskID, githubIssueNo) => {
         'X-GitHub-Api-Version': '2022-11-28'
       }
     })
+    */
 
     // Create an issue comment to note the id of the associated Clickup Task
     // TODO: add code here
@@ -32,6 +35,7 @@ const connectIssueToClickup = async (clickupTaskID, githubIssueNo) => {
         'X-GitHub-Api-Version': '2022-11-28'
       }
     })
+    console.log(`connectIssueToClickup - addCommentResponse: `, addCommentResponse)
   }
   catch (error) {
     throw Error(`connectIssueToClickup - clickupTaskID:${clickupTaskID} githubIssueNo:${githubIssueNo} error:`, error)
