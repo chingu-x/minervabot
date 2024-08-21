@@ -62,7 +62,7 @@ const handleNewIssue = async (action, body) => {
   const task = await addTaskResponse.json()
   await connectIssueToClickup(task.id, body.issue.number)
 
-  return response
+  return addTaskResponse
 }
 
 export { handleNewIssue }
