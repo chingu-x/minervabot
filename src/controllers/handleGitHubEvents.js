@@ -20,15 +20,14 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
     console.log(`handleGitHubEvents - action: ${ action }`)
     switch (action) {
       case 'opened':
+        // Clone the new issue in GitHub to Clickup
         const newIssueResult = await handleNewIssue(action, body)
-        break
-      case 'assigned':
-        console.log(`A user was assigned to an issue ${ body.issue.assignee.login }`)
         break
       case 'labeled':
         console.log(`Issue (${ body.issue.title } / ${ body.issue.number }) A label was assigned to an issue: `, body.issue.labels)
         
-        // Clone the issue to Clickup as a task when the `Add to Clickup` label is added
+        // Clone the issue to Clickup as a task when the `Add to Clickup` label 
+        // is added. 
         if (body.issue.labels.find(label => label.name === 'Add to Clickup')) {
           const newIssueResult = await handleNewIssue(action, body)
         }
