@@ -1,5 +1,5 @@
 import fetch from 'node-fetch'
-import connectIssueToClickup from '../util/connectIssueToClickup'
+import connectIssueToClickup from '../util/connectIssueToClickup.js'
 
 // When a new GitHub Issue is created generate a cooresponding ClickUp Task.
 const handleNewIssue = async (action, body) => {
