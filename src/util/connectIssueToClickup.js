@@ -26,6 +26,8 @@ const connectIssueToClickup = async (clickupTaskID, githubIssueNo) => {
 
     // Create an issue comment to note the id of the associated Clickup Task
     // TODO: add code here
+    const githubURL = `POST /repos/${process.env.GITHUB_ORG}/${process.env.GITHUB_REPO}/issues/${githubIssueNo}/comments`
+    console.log(`connectIssueToClickup - githubURL:${githubURL}`)
     const addCommentResponse = await octokit.request(`POST /repos/${process.env.GITHUB_ORG}/${process.env.GITHUB_REPO}/issues/${githubIssueNo}/comments`, {
       owner: process.env.GITHUB_ORG,
       repo: process.env.GITHUB_REPO,
