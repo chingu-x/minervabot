@@ -30,7 +30,7 @@ const handleNewIssue = async (action, body) => {
   }).toString()
 
   const listId = process.env.CLICKUP_LIST_ID
-  const response = await fetch(
+  const addTaskResponse = await fetch(
     `https://api.clickup.com/api/v2/list/${listId}/task?${query}`,
     {
       method: 'POST',
@@ -59,10 +59,10 @@ const handleNewIssue = async (action, body) => {
     }
   )
 
-  const task = await response.text()
-  console.log(`handleNewIssue - task:`, task)
-  console.log(`handleNewIssue - task.id:`, task.id)
-  await connectIssueToClickup(task.id, body.issue.number)
+  //const task = await response.text()
+  console.log(`handleNewIssue - task:`, addTaskResponse)
+  console.log(`handleNewIssue - task.id:`, addTaskResponse.id)
+  await connectIssueToClickup(addTaskResponse.id, body.issue.number)
 
   return response
 }
