@@ -61,8 +61,8 @@ const handleNewIssue = async (action, body) => {
 
   const task = await response.text()
   console.log(`handleNewIssue - task:`, task)
-  console.log(`handleNewIssue - task.tasks:`, task.tasks)
-  await connectIssueToClickup(task.tasks.id, body.issue.number)
+  console.log(`handleNewIssue - task.id:`, task.id)
+  await connectIssueToClickup(task.id, body.issue.number)
 
   return response
 }
