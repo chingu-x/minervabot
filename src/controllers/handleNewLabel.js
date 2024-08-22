@@ -6,6 +6,8 @@ import { Octokit } from 'octokit'
 const handleNewLabel = async (githubIssueNo, labelName) => {
   console.log(`handleLabelChanges - githubIssueNo:${ githubIssueNo } labelName:`, labelName)
 
+  let taskID
+
   try {
     const octokit = new Octokit({
       auth: process.env.GITHUB_TOKEN
@@ -24,7 +26,6 @@ const handleNewLabel = async (githubIssueNo, labelName) => {
 
     console.log(`handleNewLabel - issueResponse: `, issueResponse)
     const searchString = '**DO NOT MODIFY/DELETE THIS COMMENT**\nProject task ID: '
-    let taskID
     for (let comment of issueComments) {
       const taskIDIndex = comment.body.indexOf(searchString)
       if (taskIDIndex) {
@@ -59,7 +60,7 @@ const handleNewLabel = async (githubIssueNo, labelName) => {
 
   }
   catch (error) {
-    throw Error(`connectIssueToClickup - taskID:${taskID} githubIssueNo:${githubIssueNo} error:`, error)
+    throw Error(`connectIssueToClickup - taskID:${taskID} githubIssueNo:${githubIssueNo} labelName:${labelName} error:`, error)
   }
   return
 }
