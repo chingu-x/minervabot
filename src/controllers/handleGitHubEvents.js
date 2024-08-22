@@ -1,5 +1,5 @@
 import asyncHandler from 'express-async-handler'
-import { handleLabelChanges } from './handleLabelChanges.js'
+import { handleLabelChanges } from './handleNewLabel.js'
 import { handleNewIssue } from './handleNewIssue.js'
 
 const handleGitHubEvents = asyncHandler(async (request, response) => {
@@ -33,8 +33,11 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
         }
 
         // Process any other labels
-        const labelChangeResult = await handleLabelChanges(action, body)
+        const labelChangeResult = await handleNewLabel(body.issue.number, body.issue.labels)
 
+        break
+      case 'unlabeled':
+        console.log(`Issue (${ body.issue.title } / ${ body.issue.number }) A label was removed from an issue: `, body.issue.labels)
         break
       case 'closed':
         console.log(`An issue was closed by ${ body.issue.user.login }`)

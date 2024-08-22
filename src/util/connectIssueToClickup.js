@@ -12,18 +12,6 @@ const connectIssueToClickup = async (clickupTaskID, githubIssueNo) => {
       auth: process.env.GITHUB_TOKEN
     })
     
-    /*
-    // Retrieve the GitHub Issue
-    getIssueResponse = await octokit.request(`GET /repos/{owner}/{repo}/issues/${githubIssueNo}`, {
-      owner: process.env.GITHUB_ORG,
-      repo: process.env.GITHUB_REPO,
-      issue_number: githubIssueNo,
-      headers: {
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
-    })
-    */
-
     // Create an issue comment to note the id of the associated Clickup Task
     const addCommentResponse = await octokit.request(`POST /repos/{owner}/{repo}/issues/{issue_number}/comments`, {
       owner: process.env.GITHUB_ORG,
