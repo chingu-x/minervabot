@@ -1,5 +1,5 @@
 import asyncHandler from 'express-async-handler'
-import { handleLabelChanges } from './handleNewLabel.js'
+import { handleNewLabel } from './handleNewLabel.js'
 import { handleNewIssue } from './handleNewIssue.js'
 
 const handleGitHubEvents = asyncHandler(async (request, response) => {
