@@ -4,7 +4,7 @@ import { Octokit } from 'octokit'
 // When a new label is assigned to the issue add a cooresponding tag to the
 // cooresponding ClickUp Task.
 const handleNewLabel = async (githubIssueNo, labelName) => {
-  console.log(`handleLabelChanges - githubIssueNo:${ githubIssueNo } issueLabels:`, issueLabels)
+  console.log(`handleLabelChanges - githubIssueNo:${ githubIssueNo } issueLabels:`, labelName)
 
   try {
     const octokit = new Octokit({
