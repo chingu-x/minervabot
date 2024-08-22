@@ -24,7 +24,7 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
         const newIssueResult = await handleNewIssue(action, body)
         break
       case 'labeled':
-        console.log(`Issue (${ body.issue.title } / ${ body.issue.number }) A label was assigned to an issue: `, body.issue.label)
+        console.log(`Issue (${ body.issue.title } / ${ body.issue.number }) A label was assigned to an issue: `, body.issue.labels)
         
         // Clone the issue to Clickup as a task when the `Add to Clickup` label 
         // is added. 
@@ -33,8 +33,8 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
         }
 
         // Process any other labels
-        console.log(`handleGitHubEvents - body.issue:`, body.issue)
-        const labelChangeResult = await handleNewLabel(body.issue.number, body.issue.label.name)
+        console.log(`handleGitHubEvents - body:`, body)
+        const labelChangeResult = await handleNewLabel(body.issue.number, body.issue.labels)
 
         break
       case 'unlabeled':
