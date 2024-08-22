@@ -26,7 +26,7 @@ const handleNewLabel = async (githubIssueNo, labelName) => {
 
     console.log(`handleNewLabel - issueComments: `, issueComments)
     const searchString = '**DO NOT MODIFY/DELETE THIS COMMENT**\nProject task ID: '
-    for (let comment of issueComments) {
+    for (let comment of issueComments.data) {
       const taskIDIndex = comment.body.indexOf(searchString)
       if (taskIDIndex !== -1) {
         // Add the new label as a tag on the associated Clickup Task
