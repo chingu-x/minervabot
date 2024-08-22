@@ -60,7 +60,6 @@ const handleNewIssue = async (action, body) => {
   )
 
   const task = await addTaskResponse.json()
-  console.log(`handleNewIssue - task:`, task)
   await connectIssueToClickup(task.id, body.issue.number)
 
   return addTaskResponse

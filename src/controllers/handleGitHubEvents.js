@@ -1,4 +1,5 @@
 import asyncHandler from 'express-async-handler'
+import { handleLabelChanges } from './handleLabelChanges.js'
 import { handleNewIssue } from './handleNewIssue.js'
 
 const handleGitHubEvents = asyncHandler(async (request, response) => {
@@ -17,7 +18,6 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
   if (githubEvent === 'issues') {
     const body = JSON.parse(request.body.payload)
     const action = body.action
-    console.log(`handleGitHubEvents - action: ${ action }`)
     switch (action) {
       case 'opened':
         // Clone the new issue in GitHub to Clickup
@@ -31,6 +31,10 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
         if (body.issue.labels.find(label => label.name === 'Add to Clickup')) {
           const newIssueResult = await handleNewIssue(action, body)
         }
+
+        // Process any other labels
+        const labelChangeResult = await handleLabelChanges(action, body)
+
         break
       case 'closed':
         console.log(`An issue was closed by ${ body.issue.user.login }`)
