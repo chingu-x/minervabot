@@ -24,14 +24,12 @@ const handleNewLabel = async (githubIssueNo, labelName) => {
       }
     })
 
-    console.log(`handleNewLabel - issueComments: `, issueComments)
     const searchString = '**DO NOT MODIFY/DELETE THIS COMMENT**\nProject task ID: '
     for (let comment of issueComments.data) {
       const taskIDIndex = comment.body.indexOf(searchString)
       if (taskIDIndex !== -1) {
         // Add the new label as a tag on the associated Clickup Task
         taskID = comment.body.slice(taskIDIndex+searchString.length)
-        console.log(`handleNewLabel - taskID:${ taskID }`)
 
         const query = new URLSearchParams({
           custom_task_ids: 'true',
@@ -50,8 +48,6 @@ const handleNewLabel = async (githubIssueNo, labelName) => {
             }
           }
         )
-      
-        console.log(`handleNewLabel - resp:`, response)
         break
       }
     }
