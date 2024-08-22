@@ -24,7 +24,7 @@ const handleNewLabel = async (githubIssueNo, labelName) => {
       }
     })
 
-    console.log(`handleNewLabel - issueResponse: `, issueResponse)
+    console.log(`handleNewLabel - issueComments: `, issueComments)
     const searchString = '**DO NOT MODIFY/DELETE THIS COMMENT**\nProject task ID: '
     for (let comment of issueComments) {
       const taskIDIndex = comment.body.indexOf(searchString)
