@@ -33,6 +33,7 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
         }
 
         // Process any other labels
+        console.log(`handleGitHubEvents - body:`, body)
         const labelChangeResult = await handleNewLabel(body.issue.number, body.issue.labels)
 
         break
