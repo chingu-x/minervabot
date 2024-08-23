@@ -5,7 +5,7 @@ import getTaskID from '../util/getTaskID.js'
 // When a new label is assigned to the issue add a cooresponding tag to the
 // cooresponding ClickUp Task.
 const handleNewLabel = async (githubIssueNo, labelName) => {
-  console.log(`handleLabelChanges - githubIssueNo:${ githubIssueNo } labelName:`, labelName)
+  console.log(`handleNewLabel - githubIssueNo:${ githubIssueNo } labelName:`, labelName)
 
   let taskID
 
@@ -17,7 +17,6 @@ const handleNewLabel = async (githubIssueNo, labelName) => {
     // Retrieve the associated ClickUp Task ID that was added as a comment to 
     // the GitHub Issue  
     taskID = await getTaskID(githubIssueNo) 
-    console.log(`handleNewLabel - taskID:${ taskID }`)
     if (taskID !== -1) {
       // Add the new label as a tag on the associated Clickup Task
       const query = new URLSearchParams({
@@ -40,7 +39,7 @@ const handleNewLabel = async (githubIssueNo, labelName) => {
     }
   }
   catch (error) {
-    throw Error(`connectIssueToClickup - taskID:${taskID} githubIssueNo:${githubIssueNo} labelName:${labelName} error:`, error)
+    throw Error(`handleNewLabel - taskID:${taskID} githubIssueNo:${githubIssueNo} labelName:${labelName} error:`, error)
   }
   return
 }
