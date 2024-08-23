@@ -44,4 +44,4 @@ const handleNewLabel = async (githubIssueNo, labelName) => {
   return
 }
 
-export { handleNewLabel }
+export default handleNewLabel
