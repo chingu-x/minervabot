@@ -1,12 +1,11 @@
 import fetch from 'node-fetch'
 import { Octokit } from 'octokit'
+import getTaskID from '../util/getTaskID.js'
 
 // When a label is removed from the issue also remove it from the cooresponding
 // ClickUp Task.
 const handleDeleteLabel = async (githubIssueNo, labelName) => {
   console.log(`handleDeleteLabel - githubIssueNo:${ githubIssueNo } labelName:`, labelName)
-
-  let taskID
 
   try {
     const octokit = new Octokit({
@@ -15,7 +14,7 @@ const handleDeleteLabel = async (githubIssueNo, labelName) => {
     
     // Retrieve the associated ClickUp Task ID that was added as a comment to 
     // the GitHub Issue  
-    taskID = await getTaskID(githubIssueNo) 
+    const taskID = await getTaskID(githubIssueNo) 
     if (taskID !== -1) {
       // Remove the tag with the same name from the associated Clickup Task
       const query = new URLSearchParams({

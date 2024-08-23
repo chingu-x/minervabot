@@ -50,7 +50,6 @@ const handleNewIssue = async (action, body) => {
         priority: 3,
         due_date_time: false,
         start_date_time: false,
-        points: 3,
         notify_all: true,
         parent: null,
         links_to: null,
