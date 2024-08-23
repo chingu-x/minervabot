@@ -65,4 +65,4 @@ const handleNewIssue = async (action, body) => {
   return addTaskResponse
 }
 
-export { handleNewIssue }
+export default handleNewIssue
