@@ -22,7 +22,7 @@ const getTaskID = async (githubIssueNo) => {
     for (let comment of issueComments.data) {
       const taskIDIndex = comment.body.indexOf(searchString)
       if (taskIDIndex !== -1) {
-        taskID = comment.body.slice(taskIDIndex+searchString.length)
+        const taskID = comment.body.slice(taskIDIndex+searchString.length)
         return taskID // Return the associated task ID from the issue comment
       }
     }

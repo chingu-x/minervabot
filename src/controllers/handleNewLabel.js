@@ -16,7 +16,8 @@ const handleNewLabel = async (githubIssueNo, labelName) => {
     
     // Retrieve the associated ClickUp Task ID that was added as a comment to 
     // the GitHub Issue  
-    taskID = await getTaskID(githubIssueNo)  
+    taskID = await getTaskID(githubIssueNo) 
+    console.log(`handleNewLabel - taskID:${ taskID }`)
     if (taskID !== -1) {
       // Add the new label as a tag on the associated Clickup Task
       const query = new URLSearchParams({
