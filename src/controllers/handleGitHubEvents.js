@@ -1,4 +1,5 @@
 import asyncHandler from 'express-async-handler'
+import { handleDeleteLabel } from './handleDeleteLabel.js'
 import { handleNewLabel } from './handleNewLabel.js'
 import { handleNewIssue } from './handleNewIssue.js'
 
@@ -20,10 +21,12 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
     const action = body.action
     switch (action) {
       case 'opened':
-        // Clone the new issue in GitHub to Clickup
+        // When a new issue is added to GitHub clone it to a new Clickup Task
         const newIssueResult = await handleNewIssue(action, body)
         break
       case 'labeled':
+        // When a label is added to a GitHub Issue clone it to the associated
+        // Clickup Task 
         console.log(`Issue (${ body.issue.title } / ${ body.issue.number }) A label was assigned to an issue: `, body.label)
         
         // Clone the issue to Clickup as a task when the `Add to Clickup` label 
@@ -33,13 +36,17 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
         }
 
         // Process any other labels
-        const labelChangeResult = await handleNewLabel(body.issue.number, body.label.name)
+        const labelAddResult = await handleNewLabel(body.issue.number, body.label.name)
 
         break
       case 'unlabeled':
+        // When a label is removed from a GitHub Issue also remove it from the
+        // associated Clickup Task 
         console.log(`Issue (${ body.issue.title } / ${ body.issue.number }) A label was removed from an issue: `, body.issue.labels)
+        const labelDeleteResult = await handleDeleteLabel(body.issue.number, body.label.name)
         break
       case 'closed':
+        // Close the associated Clickup Task when the GitHub Issue is closed
         console.log(`An issue was closed by ${ body.issue.user.login }`)
         break
       default:
