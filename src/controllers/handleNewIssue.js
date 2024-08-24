@@ -1,8 +1,8 @@
 import fetch from 'node-fetch'
+import connectIssueToClickup from '../util/connectIssueToClickup.js'
 
 // When a new GitHub Issue is created generate a cooresponding ClickUp Task.
 const handleNewIssue = async (action, body) => {
-  console.log(`action: ${ action } body:`, body) 
 
   // Remove any screenshots from the issue description
   const SCREENSHOTS_HEADING = '***Screenshots***'
@@ -30,7 +30,7 @@ const handleNewIssue = async (action, body) => {
   }).toString()
 
   const listId = process.env.CLICKUP_LIST_ID
-  const response = await fetch(
+  const addTaskResponse = await fetch(
     `https://api.clickup.com/api/v2/list/${listId}/task?${query}`,
     {
       method: 'POST',
@@ -50,7 +50,6 @@ const handleNewIssue = async (action, body) => {
         priority: 3,
         due_date_time: false,
         start_date_time: false,
-        points: 3,
         notify_all: true,
         parent: null,
         links_to: null,
@@ -59,10 +58,10 @@ const handleNewIssue = async (action, body) => {
     }
   )
 
-  const tasks = await response.text()
-  console.log(`handleNewIssue - tasks:`, tasks)
+  const task = await addTaskResponse.json()
+  await connectIssueToClickup(task.id, body.issue.number)
 
-  return response
+  return addTaskResponse
 }
 
-export { handleNewIssue }
+export default handleNewIssue
