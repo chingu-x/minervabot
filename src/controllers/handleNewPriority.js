@@ -29,6 +29,7 @@ const handleNewPriority = async (githubIssueNo, taskPriority) => {
         { name: "Low", value: 4 }
       ]
       const priorityNumber = priorities.find((priority) => priority.name === taskPriority)
+      console.log(`handleNewPriority - priorityNumber:${ priorityNumber }`)
       if (priorityNumber === undefined) {
         return priorityNumber
       }
