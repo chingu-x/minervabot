@@ -28,10 +28,10 @@ const handleNewPriority = async (githubIssueNo, taskPriority) => {
         { name: "Normal", value: 3 },
         { name: "Low", value: 4 }
       ]
-      const priorityNumber = priorities.find((priority) => priority.name === taskPriority)
-      console.log(`handleNewPriority - priorityNumber:${ priorityNumber }`)
-      if (priorityNumber === undefined) {
-        return priorityNumber
+      const priority = priorities.find((priority) => priority.name === taskPriority)
+      console.log(`handleNewPriority - priorityNumber:${ priority.value }`)
+      if (priority === undefined) {
+        return priority
       }
 
       const taskId = taskID
@@ -44,7 +44,7 @@ const handleNewPriority = async (githubIssueNo, taskPriority) => {
             Authorization: process.env.CLICKUP_API_KEY
           },
           body: JSON.stringify({
-            priority: priorityNumber
+            priority: priority.value
           })
         }
       )
