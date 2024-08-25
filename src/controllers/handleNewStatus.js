@@ -31,7 +31,7 @@ const handleNewStatus = async (githubIssueNo, taskStatus) => {
             Authorization: process.env.CLICKUP_API_KEY
           },
           body: JSON.stringify({
-            status: taskStatus
+            status: taskStatus.toLowerCase()
           })
         }
       )
