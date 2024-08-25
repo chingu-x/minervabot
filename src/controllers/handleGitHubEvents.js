@@ -35,6 +35,14 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
           const newIssueResult = await handleNewIssue(action, body)
         }
 
+        // Process any status labels
+        const isStatusLabel = body.label.name.startsWith('status/')
+        if (isStatusLabel) {
+          const taskStatus = body.label.name.slice(7) // Strip off the `status` prefix
+          const statusAddResult = await handleNewStatus(body.issue.number, taskStatus)
+          break 
+        } 
+
         // Process any other labels
         const labelAddResult = await handleNewLabel(body.issue.number, body.label.name)
 
