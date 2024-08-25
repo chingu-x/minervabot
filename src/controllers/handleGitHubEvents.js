@@ -1,5 +1,10 @@
 import asyncHandler from 'express-async-handler'
-import { handleNewIssue } from './handleNewIssue.js'
+import handleDeleteLabel from './handleDeleteLabel.js'
+import handleNewLabel from './handleNewLabel.js'
+import handleNewIssue from './handleNewIssue.js'
+import handleNewPriority from './handleNewPriority.js'
+import handleNewStatus from './handleNewStatus.js'
+
 
 const handleGitHubEvents = asyncHandler(async (request, response) => {
   // Respond to indicate that the delivery was successfully received.
@@ -17,23 +22,50 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
   if (githubEvent === 'issues') {
     const body = JSON.parse(request.body.payload)
     const action = body.action
-    console.log(`handleGitHubEvents - action: ${ action }`)
     switch (action) {
       case 'opened':
+        // When a new issue is added to GitHub clone it to a new Clickup Task
         const newIssueResult = await handleNewIssue(action, body)
         break
-      case 'assigned':
-        console.log(`A user was assigned to an issue ${ body.issue.assignee.login }`)
-        break
       case 'labeled':
-        console.log(`Issue (${ body.issue.title } / ${ body.issue.number }) A label was assigned to an issue: `, body.issue.labels)
+        // When a label is added to a GitHub Issue clone it to the associated
+        // Clickup Task 
+        console.log(`Issue (${ body.issue.title } / ${ body.issue.number }) A label was assigned to an issue: `, body.label)
         
-        // Clone the issue to Clickup as a task when the `Add to Clickup` label is added
+        // Clone the issue to Clickup as a task when the `Add to Clickup` label 
+        // is added. 
         if (body.issue.labels.find(label => label.name === 'Add to Clickup')) {
           const newIssueResult = await handleNewIssue(action, body)
         }
+
+        // Process any status labels
+        const isStatusLabel = body.label.name.startsWith('status/')
+        if (isStatusLabel) {
+          const taskStatus = body.label.name.slice(7) // Strip off the `status` prefix
+          const statusAddResult = await handleNewStatus(body.issue.number, taskStatus)
+          break 
+        } 
+
+        // Process any priority labels
+        const isPriorityLabel = body.label.name.startsWith('priority/')
+        if (isPriorityLabel) {
+          const taskPriority = body.label.name.slice(9) // Strip off the `status` prefix
+          const priorityAddResult = await handleNewPriority(body.issue.number, taskPriority)
+          break 
+        } 
+
+        // Process any other labels
+        const labelAddResult = await handleNewLabel(body.issue.number, body.label.name)
+
+        break
+      case 'unlabeled':
+        // When a label is removed from a GitHub Issue also remove it from the
+        // associated Clickup Task 
+        console.log(`Issue (${ body.issue.title } / ${ body.issue.number }) A label was removed from an issue: `, body.issue.labels)
+        const labelDeleteResult = await handleDeleteLabel(body.issue.number, body.label.name)
         break
       case 'closed':
+        // Close the associated Clickup Task when the GitHub Issue is closed
         console.log(`An issue was closed by ${ body.issue.user.login }`)
         break
       default:
