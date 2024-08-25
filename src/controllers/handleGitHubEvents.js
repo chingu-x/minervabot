@@ -44,6 +44,14 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
           break 
         } 
 
+        // Process any priority labels
+        const isPriorityLabel = body.label.name.startsWith('priority/')
+        if (isPriorityLabel) {
+          const taskPriority = body.label.name.slice(9) // Strip off the `status` prefix
+          const priorityAddResult = await handleNewStatus(body.issue.number, taskPriority)
+          break 
+        } 
+
         // Process any other labels
         const labelAddResult = await handleNewLabel(body.issue.number, body.label.name)
 
