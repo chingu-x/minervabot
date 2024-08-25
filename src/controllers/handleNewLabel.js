@@ -10,10 +10,6 @@ const handleNewLabel = async (githubIssueNo, labelName) => {
   let taskID
 
   try {
-    const octokit = new Octokit({
-      auth: process.env.GITHUB_TOKEN
-    })
-    
     // Retrieve the associated ClickUp Task ID that was added as a comment to 
     // the GitHub Issue  
     taskID = await getTaskID(githubIssueNo) 

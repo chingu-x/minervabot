@@ -10,10 +10,6 @@ const handleNewPriority = async (githubIssueNo, taskPriority) => {
   let taskID
 
   try {
-    const octokit = new Octokit({
-      auth: process.env.GITHUB_TOKEN
-    })
-    
     // Retrieve the associated ClickUp Task ID that was added as a comment to 
     // the GitHub Issue  
     taskID = await getTaskID(githubIssueNo) 
@@ -25,6 +21,18 @@ const handleNewPriority = async (githubIssueNo, taskPriority) => {
           team_id: process.env.CLICKUP_TEAM_ID
       }).toString()
       
+      // Convert the Priority name into its numeric equivalent
+      const priorities = [
+        { name: "Urgent", value: 1 },
+        { name: "High", value: 2 },
+        { name: "Normal", value: 3 },
+        { name: "Low", value: 4 }
+      ]
+      const priorityNumber = priorities.find((priority) => priority.name === taskPriority)
+      if (priorityNumber === undefined) {
+        return priorityNumber
+      }
+
       const taskId = taskID
       const response = await fetch(
         `https://api.clickup.com/api/v2/task/${taskId}?${query}`,
@@ -35,14 +43,14 @@ const handleNewPriority = async (githubIssueNo, taskPriority) => {
             Authorization: process.env.CLICKUP_API_KEY
           },
           body: JSON.stringify({
-            priority: taskPriority
+            priority: priorityNumber
           })
         }
       )
     }
   }
   catch (error) {
-      throw Error(`handleNewStatus - taskID:${taskID} githubIssueNo:${githubIssueNo} labelName:${labelName} error:`, error)
+      throw Error(`handleNewPriority - taskID:${taskID} githubIssueNo:${githubIssueNo} taskPriority:${taskPriority} error:`, error)
   }
   return
 }
