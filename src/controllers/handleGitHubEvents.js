@@ -2,7 +2,9 @@ import asyncHandler from 'express-async-handler'
 import handleDeleteLabel from './handleDeleteLabel.js'
 import handleNewLabel from './handleNewLabel.js'
 import handleNewIssue from './handleNewIssue.js'
+import handleNewPriority from './handleNewPriority.js'
 import handleNewStatus from './handleNewStatus.js'
+
 
 const handleGitHubEvents = asyncHandler(async (request, response) => {
   // Respond to indicate that the delivery was successfully received.
@@ -48,7 +50,7 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
         const isPriorityLabel = body.label.name.startsWith('priority/')
         if (isPriorityLabel) {
           const taskPriority = body.label.name.slice(9) // Strip off the `status` prefix
-          const priorityAddResult = await handleNewStatus(body.issue.number, taskPriority)
+          const priorityAddResult = await handleNewPriority(body.issue.number, taskPriority)
           break 
         } 
 
