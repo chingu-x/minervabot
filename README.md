@@ -31,7 +31,7 @@ within GitHub, but PO's, Scrum Masters, and team leads can use Clickup to
 manage these within the larger scope of the project.
 
 In addition, Minervabot also monitors updates to GitHub issue labels and updates
-the cooresponding task in Clickup to make sure they are in sync with one another.
+the cooresponding task in Clickup to make sure they are in sync with one another. This includes the special labels `priority/...` and `status/...` which designate the priority and status of the issue.
 
 Minervabot **does not** update the description in the Clickup task when it's
 updated in the cooresponding GitHub issue at this time. Similarly, this is a
