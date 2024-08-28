@@ -22,6 +22,8 @@ const connectIssueToClickup = async (clickupTaskID, githubIssueNo) => {
         'X-GitHub-Api-Version': '2022-11-28'
       }
     })
+    console.log(`connectIssueToClickup - GITHUB_ORG:${  process.env.GITHUB_ORG } GITHUB_REPO:${ process.env.GITHUB_REPO } githubIssueNo:${ githubIssueNo }`)
+    console.log(`connectIssueToClickup - addCommentResponse: `, addCommentResponse)
   }
   catch (error) {
     throw Error(`connectIssueToClickup - clickupTaskID:${clickupTaskID} githubIssueNo:${githubIssueNo} error:`, error)
