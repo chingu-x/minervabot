@@ -23,6 +23,11 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
     const body = JSON.parse(request.body.payload)
     const action = body.action
     switch (action) {
+      case 'assigned':
+        // When someone is assigned to the GitHub issue also add them to the
+        // associated Clickup Task
+        const newAssignmentResult = await handleAssignment(action, body)
+        break
       case 'opened':
         // When a new issue is added to GitHub clone it to a new Clickup Task
         const newIssueResult = await handleNewIssue(action, body)

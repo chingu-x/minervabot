@@ -1,5 +1,4 @@
 import fetch from 'node-fetch'
-import { Octokit } from 'octokit'
 import getTaskID from '../util/getTaskID.js'
 
 // When a new status label (`status/...`) is assigned to the issue add a cooresponding 
