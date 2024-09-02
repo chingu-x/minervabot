@@ -1,5 +1,5 @@
 import fetch from 'node-fetch'
-import getClickupUserID from '../util/getClickupUserID/js'
+import getClickupUserID from '../util/getClickupUserID.js'
 import getTaskID from '../util/getTaskID.js'
 
 // When a new status label (`status/...`) is assigned to the issue add a cooresponding 
