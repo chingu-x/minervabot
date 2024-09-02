@@ -1,5 +1,4 @@
 import fetch from 'node-fetch'
-import { Octokit } from 'octokit'
 import getTaskID from '../util/getTaskID.js'
 
 // When a new label is assigned to the issue add a cooresponding tag to the

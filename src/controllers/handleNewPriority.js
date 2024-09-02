@@ -1,5 +1,4 @@
 import fetch from 'node-fetch'
-import { Octokit } from 'octokit'
 import getTaskID from '../util/getTaskID.js'
 
 // When a new priority label (`priority/...`) is assigned to the issue add a 
