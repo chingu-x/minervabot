@@ -59,8 +59,6 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
 
         // Process any other labels
         const labelAddResult = await handleNewLabel(body.issue.number, body.label.name)
-        console.log(`handleGitHubEvents - labelAddResult:${labelAddResult} for issueNo:${body.issue.number} label:${body.label.name}`)
-
         break
       case 'unlabeled':
         // When a label is removed from a GitHub Issue also remove it from the
