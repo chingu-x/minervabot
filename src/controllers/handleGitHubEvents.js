@@ -51,11 +51,15 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
         if (isPriorityLabel) {
           const taskPriority = body.label.name.slice(9) // Strip off the `status` prefix
           const priorityAddResult = await handleNewPriority(body.issue.number, taskPriority)
+          if (priorityAddResult === undefined) {
+            console.log(`handleGitHubEvents - priorityAddResult:${priorityAddResult} for issueNo:${body.issue.number} taskPriority:${taskPriority}`)
+          }
           break 
         } 
 
         // Process any other labels
         const labelAddResult = await handleNewLabel(body.issue.number, body.label.name)
+        console.log(`handleGitHubEvents - labelAddResult:${labelAddResult} for issueNo:${body.issue.number} label:${body.label.name}`)
 
         break
       case 'unlabeled':
