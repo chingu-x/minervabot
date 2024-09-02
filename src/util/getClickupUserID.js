@@ -26,4 +26,4 @@ const getClickupUserID = async (email) => {
   return
 }
 
-export default handleNewStatus
+export default getClickupUserID
