@@ -1,4 +1,5 @@
 import asyncHandler from 'express-async-handler'
+import handleAssignment from './handleAssignment.js'
 import handleDeleteLabel from './handleDeleteLabel.js'
 import handleNewLabel from './handleNewLabel.js'
 import handleNewIssue from './handleNewIssue.js'
