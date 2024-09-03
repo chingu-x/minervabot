@@ -16,7 +16,13 @@ const handleAssignment = async (githubIssueNo, body) => {
     taskID = await getTaskID(githubIssueNo) 
     if (taskID !== -1) {
       // Lookup the Clickup user ID for the GitHub user assigned to the task
-      const response = await getClickupUserID()
+      const userNameTranslationMap = [
+        { githubUserName: 'jdmedlock', clickupUserName: 'Jim Medlock' }
+      ]
+      const userNameTranslation = userNameTranslationMap.find(({ name }) => name.githubUserName === body.issue.assignee.login)
+      if (userNameTranslation !== undefined) {
+        const response = await getClickupUserID(userNameTranslation.clickupUserName)
+      }
     }
   }
   catch (error) {
