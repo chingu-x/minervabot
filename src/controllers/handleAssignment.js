@@ -6,6 +6,7 @@ import getTaskID from '../util/getTaskID.js'
 // tag to the cooresponding ClickUp Task.
 const handleAssignment = async (githubIssueNo, body) => {
   console.log(`handleAssignment - githubIssueNo:${ githubIssueNo } body:`, body)
+  console.log(`handleAssignment - body.issue.assignees:`, body.issue.assignees)
 
   let taskID
 
