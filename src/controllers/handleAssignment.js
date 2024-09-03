@@ -1,4 +1,3 @@
-import fetch from 'node-fetch'
 import getClickupUserID from '../util/getClickupUserID.js'
 import getTaskID from '../util/getTaskID.js'
 
