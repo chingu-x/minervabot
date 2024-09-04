@@ -30,7 +30,6 @@ const handleAssignment = async (githubIssueNo, body) => {
           team_id: process.env.CLICKUP_TEAM_ID
         }).toString()
       
-        const taskId = process.env.CLICKUP_TASK_ID
         const response = await fetch(
           `https://api.clickup.com/api/v2/task/${taskId}?${query}`,
           {
