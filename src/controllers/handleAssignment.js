@@ -19,6 +19,7 @@ const handleAssignment = async (githubIssueNo, body) => {
         { githubUserName: 'jdmedlock', clickupUserName: 'Jim Medlock' }
       ]
       const userNameTranslation = userNameTranslationMap.find(( entry ) => entry.githubUserName === body.issue.assignee.login)
+      console.log(`handleAssignment - assignee:${ body.issue.assignee.login } userNameTranslation:`, userNameTranslation)
       if (userNameTranslation !== undefined) {
         const response = await getClickupUserID(userNameTranslation.clickupUserName)
         console.log(`handleAssignment - response:`, response)
