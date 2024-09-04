@@ -18,7 +18,7 @@ const getClickupUserID = async (userName) => {
       }
     )
     const users = await response.text()
-    console.log(`getClickupUserID - users:`, users)
+    console.log(`getClickupUserID - users:`, users.members)
   }
   catch (error) {
       throw Error(`getClickupUserID - taskID:${taskID} githubIssueNo:${githubIssueNo} labelName:${labelName} error:`, error)
