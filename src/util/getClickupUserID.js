@@ -17,7 +17,7 @@ const getClickupUserID = async (userName) => {
         }
       }
     )
-    const users = await resp.text()
+    const users = await response.text()
     console.log(`getClickupUserID - users:`, users)
   }
   catch (error) {
