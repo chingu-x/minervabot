@@ -22,8 +22,31 @@ const handleAssignment = async (githubIssueNo, body) => {
       console.log(`handleAssignment - assignee:${ body.issue.assignee.login } userNameTranslation:`, userNameTranslation)
       if (userNameTranslation !== undefined) {
         console.log(`handleAssignment - userNameTranslation.clickupUserName:`, userNameTranslation.clickupUserName)
-        const response = await getClickupUserID(userNameTranslation.clickupUserName)
-        console.log(`handleAssignment - response:`, response)
+        const clickupUserID = await getClickupUserID(userNameTranslation.clickupUserName)
+        console.log(`handleAssignment - clickupUserID:`, clickupUserID)
+
+        const query = new URLSearchParams({
+          custom_task_ids: 'true',
+          team_id: process.env.CLICKUP_TEAM_ID
+        }).toString()
+      
+        const taskId = process.env.CLICKUP_TASK_ID
+        const response = await fetch(
+          `https://api.clickup.com/api/v2/task/${taskId}?${query}`,
+          {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: process.env.CLICKUP_API_KEY
+            },
+            body: JSON.stringify({
+              assignees: {add: [clickupUserID]},
+            })
+          }
+        )
+      
+        const data = await response.json()
+        console.log(`handleAssignment - update data:`, data)
       }
     }
   }
