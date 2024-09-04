@@ -19,11 +19,13 @@ const getClickupUserID = async (userName) => {
     )
     const users = await response.json()
     console.log(`getClickupUserID - users:`, users)
+    const clickupUserID = users.find((user) => user.username === userName)
+    return clickupUserID
   }
   catch (error) {
       throw Error(`getClickupUserID - taskID:${taskID} githubIssueNo:${githubIssueNo} labelName:${labelName} error:`, error)
   }
-  return
+  return undefined
 }
 
 export default getClickupUserID
