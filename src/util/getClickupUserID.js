@@ -19,7 +19,7 @@ const getClickupUserID = async (userName) => {
     )
     const users = await response.json()
     console.log(`getClickupUserID - users:`, users)
-    const clickupUserID = users.find((user) => user.username === userName)
+    const clickupUserID = users.members.find((user) => user.username === userName)
     return clickupUserID
   }
   catch (error) {
