@@ -31,7 +31,7 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
         break
       case 'unassigned':
         // When someone is unassigned from the GitHub issue also remove them
-        // from the associated Clickup Task
+        // from the associated Clickup Task 
         console.log(`handleGitHubEvents - unassigned - action:${action} body:`, body)
         break
       case 'opened':
