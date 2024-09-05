@@ -1,10 +1,7 @@
 import fetch from 'node-fetch'
-import getTaskID from './getTaskID.js'
 
 // Retrieve the Clickup user id for a given email address
 const getClickupUserID = async (userName) => {
-  console.log(`getClickupUserID - userName:${ userName }`)
-
   try {
     // Extract the Clickup users for our List
     const listId = process.env.CLICKUP_LIST_ID
@@ -17,13 +14,14 @@ const getClickupUserID = async (userName) => {
         }
       }
     )
-    const users = await resp.text()
-    console.log(`getClickupUserID - users:`, users)
+    const users = await response.json()
+    const clickupUser = users.members.find((user) => user.username === userName)
+    return clickupUser.id
   }
   catch (error) {
       throw Error(`getClickupUserID - taskID:${taskID} githubIssueNo:${githubIssueNo} labelName:${labelName} error:`, error)
   }
-  return
+  return undefined
 }
 
 export default getClickupUserID
