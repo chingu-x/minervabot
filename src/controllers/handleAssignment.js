@@ -13,6 +13,7 @@ const handleAssignment = async (githubIssueNo, body) => {
     // Retrieve the associated ClickUp Task ID that was added as a comment to 
     // the GitHub Issue  
     taskID = await getTaskID(githubIssueNo) 
+    console.log(`handleAssignment - taskID:`, taskID)
     if (taskID !== -1) {
       // Lookup the Clickup user ID for the GitHub user assigned to the task
       const userNameTranslationMap = [
@@ -31,7 +32,7 @@ const handleAssignment = async (githubIssueNo, body) => {
         }).toString()
       
         const response = await fetch(
-          `https://api.clickup.com/api/v2/task/${taskId}?${query}`,
+          `https://api.clickup.com/api/v2/task/${taskID}?${query}`,
           {
             method: 'PUT',
             headers: {
@@ -51,7 +52,7 @@ const handleAssignment = async (githubIssueNo, body) => {
     }
   }
   catch (error) {
-      throw Error(`handleAssignment - githubIssueNo:${githubIssueNo} error:`, error)
+    throw Error(`handleAssignment - githubIssueNo:${githubIssueNo} error:`, error)
   }
   return
 }
