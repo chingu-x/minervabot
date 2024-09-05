@@ -6,6 +6,29 @@ import getTaskID from '../util/getTaskID.js'
 const handleAssignment = async (githubIssueNo, body) => {
   console.log(`handleAssignment - githubIssueNo:${ githubIssueNo } body:`, body)
 
+  const userNameTranslationMap = [
+    { githubUserName: 'Ajen07', clickupUserName: 'Arman Kumar Jena' },
+    { githubUserName: '', clickupUserName: 'Austin Tang' },
+    { githubUserName: 'siasktv', clickupUserName: 'Bianca Benitez' },
+    { githubUserName: 'cherylii', clickupUserName: 'Cheryl' },
+    { githubUserName: 'curlwl', clickupUserName: 'Curt W' },
+    { githubUserName: 'Dan-Y-Ko', clickupUserName: 'Dan' },
+    { githubUserName: '', clickupUserName: 'Dawn Dihn' },
+    { githubUserName: '', clickupUserName: 'Eury Kim' },
+    { githubUserName: '', clickupUserName: 'J. R.' },
+    { githubUserName: 'JaneMoroz', clickupUserName: 'Jane Moroz' },
+    { githubUserName: 'jdmedlock', clickupUserName: 'Jim Medlock' },
+    { githubUserName: 'joekotvas', clickupUserName: 'Joseph Kotvas' },
+    { githubUserName: 'JoshuaHinman', clickupUserName: 'Josh Hinman' },
+    { githubUserName: 'MattRueter', clickupUserName: 'Matt Rueter' },
+    { githubUserName: 'mladen-krstin', clickupUserName: 'Mladen Krstin' },
+    { githubUserName: 'roziii', clickupUserName: 'Rozi' },
+    { githubUserName: 'ellrub', clickupUserName: 'Ruben Ellefsen' },
+    { githubUserName: 'timDeHof', clickupUserName: 'Tim DeHof' },
+    { githubUserName: 'timothyrusso', clickupUserName: 'Timothy Russo' },
+    { githubUserName: 'winniecwng', clickupUserName: 'Winnie Ng' },
+  ]
+
   let taskID
 
   try {
@@ -14,9 +37,6 @@ const handleAssignment = async (githubIssueNo, body) => {
     taskID = await getTaskID(githubIssueNo) 
     if (taskID !== -1) {
       // Lookup the Clickup user ID for the GitHub user assigned to the task
-      const userNameTranslationMap = [
-        { githubUserName: 'jdmedlock', clickupUserName: 'Jim Medlock' }
-      ]
       const userNameTranslation = userNameTranslationMap.find(( entry ) => entry.githubUserName === body.issue.assignee.login)
       if (userNameTranslation !== undefined) {
         const clickupUserID = await getClickupUserID(userNameTranslation.clickupUserName)
