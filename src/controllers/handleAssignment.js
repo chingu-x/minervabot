@@ -5,7 +5,6 @@ import getTaskID from '../util/getTaskID.js'
 // tag to the cooresponding ClickUp Task.
 const handleAssignment = async (githubIssueNo, body) => {
   console.log(`handleAssignment - githubIssueNo:${ githubIssueNo } body:`, body)
-  console.log(`handleAssignment - body.issue.assignees:`, body.issue.assignees)
 
   let taskID
 
@@ -13,19 +12,14 @@ const handleAssignment = async (githubIssueNo, body) => {
     // Retrieve the associated ClickUp Task ID that was added as a comment to 
     // the GitHub Issue  
     taskID = await getTaskID(githubIssueNo) 
-    console.log(`handleAssignment - taskID:`, taskID)
     if (taskID !== -1) {
       // Lookup the Clickup user ID for the GitHub user assigned to the task
       const userNameTranslationMap = [
         { githubUserName: 'jdmedlock', clickupUserName: 'Jim Medlock' }
       ]
       const userNameTranslation = userNameTranslationMap.find(( entry ) => entry.githubUserName === body.issue.assignee.login)
-      console.log(`handleAssignment - assignee:${ body.issue.assignee.login } userNameTranslation:`, userNameTranslation)
       if (userNameTranslation !== undefined) {
-        console.log(`handleAssignment - userNameTranslation.clickupUserName:`, userNameTranslation.clickupUserName)
         const clickupUserID = await getClickupUserID(userNameTranslation.clickupUserName)
-        console.log(`handleAssignment - clickupUserID:`, clickupUserID, [clickupUserID])
-
         const query = new URLSearchParams({
           custom_task_ids: 'true',
           team_id: process.env.CLICKUP_TEAM_ID
@@ -44,10 +38,6 @@ const handleAssignment = async (githubIssueNo, body) => {
             })
           }
         )
-
-        console.log(`handleAssignment - response:`, response)
-        const data = await response.json()
-        console.log(`handleAssignment - update data:`, data)
       }
     }
   }
