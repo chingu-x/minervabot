@@ -43,7 +43,8 @@ const handleAssignment = async (githubIssueNo, body) => {
             })
           }
         )
-      
+
+        console.log(`handleAssignment - response:`, response)
         const data = await response.json()
         console.log(`handleAssignment - update data:`, data)
       }
