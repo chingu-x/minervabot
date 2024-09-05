@@ -13,8 +13,7 @@ const handleAssignment = async (githubIssueNo, body) => {
     { githubUserName: 'cherylii', clickupUserName: 'Cheryl' },
     { githubUserName: 'curlwl', clickupUserName: 'Curt W' },
     { githubUserName: 'Dan-Y-Ko', clickupUserName: 'Dan' },
-    { githubUserName: '', clickupUserName: 'Dawn Dihn' },
-    { githubUserName: '', clickupUserName: 'Eury Kim' },
+    { githubUserName: 'eury-k', clickupUserName: 'Eury Kim' },
     { githubUserName: '', clickupUserName: 'J. R.' },
     { githubUserName: 'JaneMoroz', clickupUserName: 'Jane Moroz' },
     { githubUserName: 'jdmedlock', clickupUserName: 'Jim Medlock' },
@@ -38,6 +37,7 @@ const handleAssignment = async (githubIssueNo, body) => {
     if (taskID !== -1) {
       // Lookup the Clickup user ID for the GitHub user assigned to the task
       const userNameTranslation = userNameTranslationMap.find(( entry ) => entry.githubUserName === body.issue.assignee.login)
+      console.log(`handleAssignment - userNameTranslation: `, userNameTranslation)
       if (userNameTranslation !== undefined) {
         const clickupUserID = await getClickupUserID(userNameTranslation.clickupUserName)
         const query = new URLSearchParams({
