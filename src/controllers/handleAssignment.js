@@ -23,7 +23,7 @@ const handleAssignment = async (githubIssueNo, body) => {
       if (userNameTranslation !== undefined) {
         console.log(`handleAssignment - userNameTranslation.clickupUserName:`, userNameTranslation.clickupUserName)
         const clickupUserID = await getClickupUserID(userNameTranslation.clickupUserName)
-        console.log(`handleAssignment - clickupUserID:`, clickupUserID)
+        console.log(`handleAssignment - clickupUserID:`, clickupUserID, [clickupUserID])
 
         const query = new URLSearchParams({
           custom_task_ids: 'true',
@@ -39,7 +39,7 @@ const handleAssignment = async (githubIssueNo, body) => {
               Authorization: process.env.CLICKUP_API_KEY
             },
             body: JSON.stringify({
-              assignees: {add: [clickupUserID]},
+              assignees: { add: [clickupUserID], rem: [] },
             })
           }
         )
