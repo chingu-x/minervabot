@@ -23,6 +23,7 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
   if (githubEvent === 'issues') {
     const body = JSON.parse(request.body.payload)
     const action = body.action
+    console.log(`handleGitHubEvents - action: ${ action }`)
     switch (action) {
       case 'assigned':
         // When someone is assigned to the GitHub issue also add them to the
@@ -35,16 +36,15 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
         const removeAssignmentResult = await handleAssignment(action, body.issue.number, body)
         break
       case 'opened':
-        // When a new issue is added to GitHub clone it to a new Clickup Task
         const newIssueResult = await handleNewIssue(action, body)
         break
+      case 'assigned':
+        console.log(`A user was assigned to an issue ${ body.issue.assignee.login }`)
+        break
       case 'labeled':
-        // When a label is added to a GitHub Issue clone it to the associated
-        // Clickup Task 
-        console.log(`Issue (${ body.issue.title } / ${ body.issue.number }) A label was assigned to an issue: `, body.label)
+        console.log(`Issue (${ body.issue.title } / ${ body.issue.number }) A label was assigned to an issue: `, body.issue.labels)
         
-        // Clone the issue to Clickup as a task when the `Add to Clickup` label 
-        // is added. 
+        // Clone the issue to Clickup as a task when the `Add to Clickup` label is added
         if (body.issue.labels.find(label => label.name === 'Add to Clickup')) {
           const newIssueResult = await handleNewIssue(action, body)
         }
@@ -78,7 +78,6 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
         const labelDeleteResult = await handleDeleteLabel(body.issue.number, body.label.name)
         break
       case 'closed':
-        // Close the associated Clickup Task when the GitHub Issue is closed
         console.log(`An issue was closed by ${ body.issue.user.login }`)
         break
       default:
