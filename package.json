@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A GitHub Webhook to update Clickup Tasks from GitHub Issues",
   "main": "minervabot.js",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chingu-x/minervabot.git"
@@ -19,9 +20,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "axios": "^1.7.4",
     "body-parser": "^1.20.2",
     "express": "^4.19.2",
-    "express-async-handler": "^1.2.0"
+    "express-async-handler": "^1.2.0",
+    "node-fetch": "^3.3.2",
+    "octokit": "^4.0.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
