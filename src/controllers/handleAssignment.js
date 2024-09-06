@@ -1,6 +1,6 @@
 import getClickupUserID from '../util/getClickupUserID.js'
 import getTaskID from '../util/getTaskID.js'
-import userTranslationMap from '../util/userTranslationMap.js'
+import { userTranslationMap } from '../util/userTranslationMap.js'
 
 // When a new status label (`status/...`) is assigned to the issue add a cooresponding 
 // tag to the cooresponding ClickUp Task.
@@ -19,7 +19,7 @@ const handleAssignment = async (action, githubIssueNo, body) => {
       console.log(`handleAssignment - userName: `, userName)
       if (userName !== undefined) {
         const clickupUserID = await getClickupUserID(userTranslation.clickupUserName)
-        const assigneeAction = action === 'assigned' ? '{add: [clickupUserID]}' : '{rem: [clickupUserID]}'
+        const assigneeAction = action === 'assigned' ? {add: [clickupUserID]} : {rem: [clickupUserID]}
         const query = new URLSearchParams({
           custom_task_ids: 'true',
           team_id: process.env.CLICKUP_TEAM_ID
