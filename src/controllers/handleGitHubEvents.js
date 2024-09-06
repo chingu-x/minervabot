@@ -27,12 +27,12 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
       case 'assigned':
         // When someone is assigned to the GitHub issue also add them to the
         // associated Clickup Task
-        const newAssignmentResult = await handleAssignment(body.issue.number, body)
+        const newAssignmentResult = await handleAssignment(action, body.issue.number, body)
         break
       case 'unassigned':
         // When someone is unassigned from the GitHub issue also remove them
         // from the associated Clickup Task 
-        console.log(`handleGitHubEvents - unassigned - action:${action} body:`, body)
+        const removeAssignmentResult = await handleAssignment(action, body.issue.number, body)
         break
       case 'opened':
         // When a new issue is added to GitHub clone it to a new Clickup Task
