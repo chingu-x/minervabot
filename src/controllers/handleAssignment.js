@@ -20,9 +20,8 @@ const handleAssignment = async (action, githubIssueNo, body) => {
       console.log(`handleAssignment - userName: `, userName)
       if (userName !== undefined) {
         const clickupUserID = await getClickupUserID(userName.clickupUserName)
-        console.log(`handleAssignment - clickupUserID:${ clickupUserID}`)
         const assigneeAction = action === 'assigned' ? {add: [clickupUserID]} : {rem: [clickupUserID]}
-        console.log(`handleAssignment - assigneeAction: `, assigneeAction)
+        console.log(`handleAssignment - ClickupUseID:${ clickupUserID } assigneeAction: `, assigneeAction)
         const query = new URLSearchParams({
           custom_task_ids: 'true',
           team_id: process.env.CLICKUP_TEAM_ID
@@ -41,8 +40,6 @@ const handleAssignment = async (action, githubIssueNo, body) => {
             })
           }
         )
-        console.log(`handleAssignment - assigneeAction: `, assigneeAction)
-        console.log(`handleAssignment - response: `, response)
       }
     }
   }
