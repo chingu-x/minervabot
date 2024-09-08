@@ -20,6 +20,7 @@ const getTaskID = async (githubIssueNo) => {
 
     const searchString = '**DO NOT MODIFY/DELETE THIS COMMENT**\r\nProject task ID: '
     for (let comment of issueComments.data) {
+      console.log(`getTaskID - comment:`, comment)
       const taskIDIndex = comment.body.indexOf(searchString)
       if (taskIDIndex !== -1) {
         const taskID = comment.body.slice(taskIDIndex+searchString.length)
