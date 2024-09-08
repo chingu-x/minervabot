@@ -40,6 +40,8 @@ const handleAssignment = async (action, githubIssueNo, body) => {
             })
           }
         )
+        console.log(`handleAssignment - assigneeAction: `, assigneeAction)
+        console.log(`handleAssignment - response: `, response)
       }
     }
   }
