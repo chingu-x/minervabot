@@ -49,6 +49,14 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
           const newIssueResult = await handleNewIssue(action, body)
         }
 
+        // Process any team labels
+        const isTeamLabel = body.label.name.startsWith('team/')
+        if (isTeamLabel) {
+          const taskTeam = body.label.name.slice(5) // Strip off the `team` prefix
+          const teamAddResult = await handleNewLabel(body.issue.number, taskTeam)
+          break
+        } 
+
         // Process any status labels
         const isStatusLabel = body.label.name.startsWith('status/')
         if (isStatusLabel) {
