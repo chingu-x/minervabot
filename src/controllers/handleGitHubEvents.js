@@ -87,6 +87,7 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
         break
       case 'closed':
         console.log(`An issue was closed by ${ body.issue.user.login }`)
+        const statusAddResult = await handleNewStatus(body.issue.number, 'IN REVIEW')
         break
       default:
         console.log(`Unhandled action for the issue event: ${ action }`)
