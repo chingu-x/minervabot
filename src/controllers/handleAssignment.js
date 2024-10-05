@@ -13,15 +13,15 @@ const handleAssignment = async (action, githubIssueNo, body) => {
     // Retrieve the associated ClickUp Task ID that was added as a comment to 
     // the GitHub Issue  
     taskID = await getTaskID(githubIssueNo) 
+    console.log(`handleAssignment - taskID: `, taskID)
     if (taskID !== -1) {
       // Lookup the Clickup user ID for the GitHub user assigned to the task
       const userName = userTranslationMap.find(( entry ) => entry.githubUserName === body.assignee.login)
       console.log(`handleAssignment - userName: `, userName)
       if (userName !== undefined) {
         const clickupUserID = await getClickupUserID(userName.clickupUserName)
-        console.log(`handleAssignment - clickupUserID:${ clickupUserID}`)
         const assigneeAction = action === 'assigned' ? {add: [clickupUserID]} : {rem: [clickupUserID]}
-        console.log(`handleAssignment - assigneeAction: `, assigneeAction)
+        console.log(`handleAssignment - ClickupUseID:${ clickupUserID } assigneeAction: `, assigneeAction)
         const query = new URLSearchParams({
           custom_task_ids: 'true',
           team_id: process.env.CLICKUP_TEAM_ID
