@@ -3,10 +3,11 @@ import getTaskID from '../util/getTaskID.js'
 
 // When a new status label (`status/...`) is assigned to the issue add a cooresponding 
 // tag to the cooresponding ClickUp Task.
-const handleNewStatus = async (githubIssueNo, taskStatus) => {
-  console.log(`handleNewStatus - githubIssueNo:${ githubIssueNo } taskStatus:`, taskStatus)
-
+const handleNewStatus = async (parms) => {
+  const [githubIssueNo, taskStatus] = parms
   let taskID
+
+  console.log(`handleNewStatus - githubIssueNo:${ githubIssueNo } taskStatus:`, taskStatus)
 
   try {
     // Retrieve the associated ClickUp Task ID that was added as a comment to 

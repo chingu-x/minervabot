@@ -4,10 +4,11 @@ import { userTranslationMap } from '../util/userTranslationMap.js'
 
 // When a new status label (`status/...`) is assigned to the issue add a cooresponding 
 // tag to the cooresponding ClickUp Task.
-const handleAssignment = async (action, githubIssueNo, body) => {
-  console.log(`handleAssignment - action:${ action } githubIssueNo:${ githubIssueNo } body.assignee:`, body.assignee)
-
+const handleAssignment = async (parms) => {
+  const [action, githubIssueNo, body] = parms
   let taskID
+
+  console.log(`handleAssignment - action:${ action } githubIssueNo:${ githubIssueNo } body.assignee:`, body.assignee)
 
   try {
     // Retrieve the associated ClickUp Task ID that was added as a comment to 

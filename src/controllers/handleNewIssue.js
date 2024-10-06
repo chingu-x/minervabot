@@ -2,7 +2,9 @@ import fetch from 'node-fetch'
 import connectIssueToClickup from '../util/connectIssueToClickup.js'
 
 // When a new GitHub Issue is created generate a cooresponding ClickUp Task.
-const handleNewIssue = async (action, body) => {
+const handleNewIssue = async (parms) => {
+  const [body] = parms
+
   // Remove any screenshots from the issue description
   const SCREENSHOTS_HEADING = '***Screenshots***'
   const screenshotsIndex = body.issue.body.indexOf(SCREENSHOTS_HEADING)+SCREENSHOTS_HEADING.length

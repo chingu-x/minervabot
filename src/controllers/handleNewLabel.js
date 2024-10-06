@@ -41,7 +41,9 @@ const assignLabel = async (githubIssueNo, labelName) => {
   return
 }
 
-const handleNewLabel = async(githubIssueNo, labelName) => {
+const handleNewLabel = async(parms) => {
+  const [githubIssueNo, labelName] = parms
+
   // Clone the issue to Clickup as a task when the `Add to Clickup` label is added
   if (body.issue.labels.find(label => label.name === 'Add to Clickup')) {
     const newIssueResult = await assignLabel(action, body)
@@ -60,7 +62,7 @@ const handleNewLabel = async(githubIssueNo, labelName) => {
   // Process any status labels
   if (isStatusLabel) {
     const taskStatus = body.label.name.slice(7) // Strip off the `status` prefix
-    const statusAddResult = await handleNewStatus(body.issue.number, taskStatus)
+    const statusAddResult = await handleNewStatus([body.issue.number, taskStatus])
   } 
 
   // Process any priority labels
