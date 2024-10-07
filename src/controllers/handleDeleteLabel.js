@@ -6,7 +6,7 @@ import getTaskID from '../util/getTaskID.js'
 // ClickUp Task.
 const handleDeleteLabel = async (parms) => {
   const [githubIssueNo, body] = parms
-  console.log(`handleDeleteLabel - githubIssueNo:${ githubIssueNo } labelName:`, labelName)
+  console.log(`handleDeleteLabel - githubIssueNo:${ githubIssueNo } labelName:`, body.label.name)
 
   try {
     const octokit = new Octokit({
@@ -38,7 +38,7 @@ const handleDeleteLabel = async (parms) => {
     }
   }
   catch (error) {
-    throw Error(`handleDeleteLabel - taskID:${taskID} githubIssueNo:${githubIssueNo} labelName:${labelName} error:`, error)
+    throw Error(`handleDeleteLabel - taskID:${taskID} githubIssueNo:${githubIssueNo} label:${body.label.name} error:`, error)
   }
   return
 }
