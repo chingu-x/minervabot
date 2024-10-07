@@ -5,7 +5,7 @@ import getTaskID from '../util/getTaskID.js'
 // When a label is removed from the issue also remove it from the cooresponding
 // ClickUp Task.
 const handleDeleteLabel = async (parms) => {
-  const [githubIssueNo, labelName] = parms
+  const [githubIssueNo, body] = parms
   console.log(`handleDeleteLabel - githubIssueNo:${ githubIssueNo } labelName:`, labelName)
 
   try {
@@ -24,7 +24,7 @@ const handleDeleteLabel = async (parms) => {
       }).toString()
     
       const taskId = taskID
-      const tagName = labelName
+      const tagName = body.label.name
       const response = await fetch(
         `https://api.clickup.com/api/v2/task/${taskId}/tag/${tagName}?${query}`,
         {
