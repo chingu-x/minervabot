@@ -3,7 +3,6 @@ import handleAssignment from './handleAssignment.js'
 import handleDeleteLabel from './handleDeleteLabel.js'
 import handleNewLabel from './handleNewLabel.js'
 import handleNewIssue from './handleNewIssue.js'
-import handleNewPriority from './handleNewPriority.js'
 import handleNewStatus from './handleNewStatus.js'
 
 const handleGitHubEvents = asyncHandler(async (request, response) => {
@@ -22,16 +21,15 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
   if (githubEvent === 'issues') {
     const body = JSON.parse(request.body.payload)
     const action = body.action
-    const issueNo = body.issue.number
     console.log(`handleGitHubEvents - action: ${ action }`)
 
     const ghEvents = [
-      { name: `assigned`, handler: handleAssignment, parms: { action, issueNo, body } },
-      { name: `unassigned`, handler: handleAssignment, parms: { action, issueNo, body } },
-      { name: `opened`, handler: handleNewIssue, parms: { action, body } },
-      { name: `labeled`, handler: handleLabel, parms: { action, body } },
-      { name: `unlabeled`, handler: handleDeleteLabel, parms: { action, issueNo, body } },
-      { name: `closed`, handler: handleNewStatus, parms: { action, issueNo } },
+      { name: `assigned`, handler: handleAssignment, parms: [ action, body.issue.number, body ] },
+      { name: `unassigned`, handler: handleAssignment, parms: [ action, body.issue.number, body ] },
+      { name: `opened`, handler: handleNewIssue, parms: [ body ] },
+      { name: `labeled`, handler: handleNewLabel, parms: [ body.issue.number, body] },
+      { name: `unlabeled`, handler: handleDeleteLabel, parms: [ body.issue.number, body] },
+      { name: `closed`, handler: handleNewStatus, parms: [ body.issue.number, body] },
     ]
 
     const event = ghEvents.find((entry) => entry.name === action)

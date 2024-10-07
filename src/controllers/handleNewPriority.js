@@ -4,9 +4,9 @@ import getTaskID from '../util/getTaskID.js'
 // When a new priority label (`priority/...`) is assigned to the issue add a 
 // cooresponding priority to the cooresponding ClickUp Task.
 const handleNewPriority = async (githubIssueNo, taskPriority) => {
-  console.log(`handleNewPriority - githubIssueNo:${ githubIssueNo } taskPriority:`, taskPriority)
-
   let taskID
+
+  console.log(`handleNewPriority - githubIssueNo:${ githubIssueNo } taskPriority:`, taskPriority)
 
   try {
     // Retrieve the associated ClickUp Task ID that was added as a comment to 
