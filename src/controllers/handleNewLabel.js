@@ -42,7 +42,7 @@ const assignLabel = async (githubIssueNo, labelName) => {
 }
 
 const handleNewLabel = async(parms) => {
-  const [githubIssueNo, labelName] = parms
+  const [githubIssueNo, body] = parms
 
   // Clone the issue to Clickup as a task when the `Add to Clickup` label is added
   if (body.issue.labels.find(label => label.name === 'Add to Clickup')) {
