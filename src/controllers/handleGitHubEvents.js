@@ -6,7 +6,6 @@ import handleNewIssue from './handleNewIssue.js'
 import handleNewPriority from './handleNewPriority.js'
 import handleNewStatus from './handleNewStatus.js'
 
-
 const handleGitHubEvents = asyncHandler(async (request, response) => {
   // Respond to indicate that the delivery was successfully received.
   // Your server should respond with a 2XX response within 10 seconds of 
@@ -23,7 +22,26 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
   if (githubEvent === 'issues') {
     const body = JSON.parse(request.body.payload)
     const action = body.action
+    const issueNo = body.issue.number
     console.log(`handleGitHubEvents - action: ${ action }`)
+
+    const ghEvents = [
+      { name: `assigned`, handler: handleAssignment, parms: { action, issueNo, body } },
+      { name: `unassigned`, handler: handleAssignment, parms: { action, issueNo, body } },
+      { name: `opened`, handler: handleNewIssue, parms: { action, body } },
+      { name: `labeled`, handler: handleLabel, parms: { action, body } },
+      { name: `unlabeled`, handler: handleDeleteLabel, parms: { action, issueNo, body } },
+      { name: `closed`, handler: handleNewStatus, parms: { action, issueNo } },
+    ]
+
+    const event = ghEvents.find((entry) => entry.name === action)
+    if (event !== undefined) {
+      event.handler(event.parms)
+    } else {
+      console.log(`No event handler for the issue event: ${ action }`)
+    }
+
+    /*
     switch (action) {
       case 'assigned':
         // When someone is assigned to the GitHub issue also add them to the
@@ -37,9 +55,6 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
         break
       case 'opened':
         const newIssueResult = await handleNewIssue(action, body)
-        break
-      case 'assigned':
-        console.log(`A user was assigned to an issue ${ body.issue.assignee.login }`)
         break
       case 'labeled':
         console.log(`Issue (${ body.issue.title } / ${ body.issue.number }) A label was assigned to an issue: `, body.issue.labels)
@@ -92,6 +107,7 @@ const handleGitHubEvents = asyncHandler(async (request, response) => {
       default:
         console.log(`Unhandled action for the issue event: ${ action }`)
     }
+    */
   } else if (githubEvent === 'ping') {
     console.log('GitHub sent the ping event')
   } else {
